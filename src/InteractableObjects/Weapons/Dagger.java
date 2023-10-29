@@ -1,4 +1,6 @@
-package InteractableObjects;
+package InteractableObjects.Weapons;
+
+import InteractableObjects.Weapons.Weapon;
 
 public class Dagger extends Weapon {
     public Dagger() {

@@ -1,7 +1,8 @@
-package InteractableObjects;
+package InteractableObjects.Weapons;
 
 import Characters.Character;
 import Characters.MainCharacter;
+import InteractableObjects.InteractableObject;
 import Scenes.Position;
 
 import java.util.Map;
@@ -67,10 +68,10 @@ public abstract class Weapon extends InteractableObject {
 
     /**
      * Attacks all characters in the scene within range with the weapon
-     * Does damage if the character is in range
+     * Can be overridden for custom behaviour
      * @param sender the character that sent the request
      */
-    private void use(Character sender) {
+    protected void use(Character sender) {
         var scene = sender.getCurrentScene();
         var position = sender.getPosition();
 

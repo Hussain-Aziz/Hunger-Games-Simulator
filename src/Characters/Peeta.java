@@ -1,6 +1,6 @@
 package Characters;
 
-import InteractableObjects.Dagger;
+import InteractableObjects.Weapons.Dagger;
 import InteractableObjects.InteractableObject;
 import Singletons.UI;
 

@@ -2,7 +2,7 @@ package Scenes;
 
 import Characters.Character;
 import Characters.Peeta;
-import InteractableObjects.Dagger;
+import InteractableObjects.Weapons.Dagger;
 import InteractableObjects.InteractableObject;
 
 import java.util.HashMap;
