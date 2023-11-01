@@ -3,6 +3,7 @@ package InteractableObjects.Weapons;
 import Characters.Character;
 import Characters.MainCharacter;
 import InteractableObjects.InteractableObject;
+import InteractableObjects.Weapons.Attacks.AttackBehaviour;
 import Scenes.Position;
 
 import java.util.Map;
@@ -13,21 +14,16 @@ import java.util.Map;
 public abstract class Weapon extends InteractableObject {
 
     /**
-     * The damage that this weapon does
+     * The attack behaviour of the weapon
      */
-    protected int damage;
-
-    /**
-     * The range of this weapon
-     */
-    protected int range;
+    protected AttackBehaviour attackBehaviour;
 
     /**
      * Constructor for the Weapon class
      */
-    public Weapon(String name, String description, int damage) {
+    public Weapon(String name, String description, AttackBehaviour attackBehaviour) {
         super(name, description);
-        this.damage = damage;
+        this.attackBehaviour = attackBehaviour;
     }
 
     /** Called when the player interacts with this object
@@ -49,7 +45,7 @@ public abstract class Weapon extends InteractableObject {
                     owner = sender;
                 }
             }
-            case "use" -> use(sender);
+            case "use" -> attackBehaviour.attack(sender);
             case "drop" -> {
                 // make the character drop the object
                 sender.drop(this);
@@ -64,33 +60,5 @@ public abstract class Weapon extends InteractableObject {
             }
             default -> Singletons.UI.getInstance().print("I can't do that with", name);
         }
-    }
-
-    /**
-     * Attacks all characters in the scene within range with the weapon
-     * Can be overridden for custom behaviour
-     * @param sender the character that sent the request
-     */
-    protected void use(Character sender) {
-        var scene = sender.getCurrentScene();
-        var position = sender.getPosition();
-
-        for(Map.Entry<Character, Position> entry : scene.getCharacters().entrySet()) {
-            var character = entry.getKey();
-            var characterPosition = entry.getValue();
-
-            // can't attack yourself
-            if (character == sender)
-                continue;
-
-            if (characterPosition.isInContact(position, range)) {
-                character.takeDamage(damage);
-                // only do prints for main character
-                if (!(sender instanceof MainCharacter)) {
-                    Singletons.UI.getInstance().print("You hit", character.getName(), "for", damage, "damage");
-                }
-            }
-        }
-
     }
 }
