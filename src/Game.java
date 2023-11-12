@@ -3,6 +3,7 @@ import Characters.Character;
 import Enums.Direction;
 import Singletons.SceneManager;
 import Singletons.UI;
+import MessageArchitecture.Narrator;
 
 /**
  * Class that acts as the entry point of the game
@@ -23,6 +24,10 @@ public class Game {
         var startingScene = SceneManager.getInstance().getSceneList().get(0);
         Character mainCharacter = new Katniss();
         startingScene.characterEntry(mainCharacter, Direction.north);
+        
+        // create narrator and add characters as subjects
+        Character[] characters = {mainCharacter};
+        Narrator narrator = new Narrator(characters);
 
     }
 }

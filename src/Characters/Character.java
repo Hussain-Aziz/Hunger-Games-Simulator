@@ -1,7 +1,12 @@
 package Characters;
 
+import java.util.ArrayList;
+
 import Enums.Direction;
 import InteractableObjects.InteractableObjectOwner;
+import MessageArchitecture.Message;
+import MessageArchitecture.Observer;
+import MessageArchitecture.Subject;
 import Scenes.Position;
 import Scenes.Scene;
 import Singletons.UI;
@@ -9,7 +14,7 @@ import Singletons.UI;
 /**
  * The base class for all characters in the game
  */
-public abstract class Character implements Runnable, InteractableObjectOwner {
+public abstract class Character implements Runnable, InteractableObjectOwner, Subject {
     /**
      * The thread that the character runs on
      */
@@ -29,11 +34,17 @@ public abstract class Character implements Runnable, InteractableObjectOwner {
     protected Scene currentScene;
 
     /**
+     * Observer array used for ConcreteSubject implementation
+     */
+    private ArrayList<Observer> observers;
+    
+    /**
      * Constructor of the Character class
      */
     public Character(String name, int health) {
         this.name = name;
         this.health = health;
+        observers = new ArrayList <Observer>();
 
         this.thread = new Thread(this);
         this.thread.start();
@@ -91,8 +102,32 @@ public abstract class Character implements Runnable, InteractableObjectOwner {
     }
     public void takeDamage(int damage) {
         health -= damage;
+        if (health == 1) {
+        	publishMessage(new Message(this, "health", "low health"));
+        }
+        else if (health == 0) {
+        	publishMessage(new Message(this, "health", "death"));
+        }
     }
     public String getName() {
         return name;
     }
+    
+    /**
+     *ConcreteSubject implementation
+     */    
+	public void registerObserver(Observer o) {
+		observers.add(o);
+	}
+	
+	public void removeObsever(Observer o) {
+		observers.remove(o);
+	}
+	
+	public void publishMessage(Message m) {
+		for (int i = 0; i < observers.size(); i++) {
+			Observer observer = (Observer)
+			observers.get(i); observer.update(m);
+		}
+	}
 }
