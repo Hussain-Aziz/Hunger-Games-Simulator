@@ -1,6 +1,7 @@
 package Scenes;
 
 import Characters.Character;
+import Characters.Environment;
 import Characters.MainCharacter;
 import Enums.Direction;
 import InteractableObjects.InteractableObject;
@@ -152,4 +153,6 @@ public abstract class Scene implements InteractableObjectOwner {
     public HashMap<Character, Position> getCharacters() {
         return characters;
     }
+
+	public abstract InteractableObjects.Environment getEnv();
 }

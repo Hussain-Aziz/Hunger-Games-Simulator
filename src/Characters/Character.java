@@ -3,6 +3,8 @@ package Characters;
 import java.util.ArrayList;
 
 import Enums.Direction;
+import InteractableObjects.Environment;
+import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectOwner;
 import MessageArchitecture.Message;
 import MessageArchitecture.Observer;
@@ -10,7 +12,6 @@ import MessageArchitecture.Subject;
 import Scenes.Position;
 import Scenes.Scene;
 import Singletons.UI;
-
 /**
  * The base class for all characters in the game
  */
@@ -68,8 +69,25 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
             case east -> newPosition.setX(newPosition.getX() + 1);
             case west -> newPosition.setX(newPosition.getX() - 1);
         }
-
+        if ((newPosition.getY() >= 2 && newPosition.getX() >= 2) && (newPosition.getY() != 2 && newPosition.getX() != 2))
+        {
+        	Scene forestScene = Singletons.SceneManager.getInstance().getAdjacentScene(currentScene, direction);
+        	if (forestScene != null)
+        	{
+        		forestScene.characterEntry(this, direction);
+        		setCurrentScene(forestScene);
+        		Environment forestEnvironment = forestScene.getEnv();
+        		forestEnvironment.interact(this, "Climb");
+        		//UI.getInstance().print("Player is in the forest !\n ");
+        	}
+        	
+        	
+        	//TODO: do the same but for cornucopia and mountain area ....
+        }
         currentScene.moveCharacter(this, newPosition);
+        
+       // InteractableObject ObjectsAtNewPosition = currentScene.getInteractableObjectAtPosition(newPosition); 					  ()()()
+    
     }
 
     /**
@@ -109,6 +127,17 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
         	publishMessage(new Message(this, "health", "death"));
         }
     }
+    
+   /* public void Heal(int damage) {
+        health -= damage;
+        if (health == 1) {
+        	publishMessage(new Message(this, "health", "low health"));
+        }
+        else if (health == 0) {
+        	publishMessage(new Message(this, "health", "death"));
+        }
+    }*/
+    
     public String getName() {
         return name;
     }

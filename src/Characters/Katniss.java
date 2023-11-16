@@ -1,16 +1,16 @@
 package Characters;
 
 import Enums.Direction;
+import InteractableObjects.Environment;
 import InteractableObjects.InteractableObject;
 import Scenes.Position;
 import Singletons.UI;
 
 import java.util.ArrayList;
-
 public class Katniss extends Character implements MainCharacter {
 
     protected ArrayList<InteractableObject> inventory;
-
+    protected Environment environment;
     protected final static int MAX_INVENTORY_SIZE = 3;
 
     public Katniss() {

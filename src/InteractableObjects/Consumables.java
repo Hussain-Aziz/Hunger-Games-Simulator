@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * A template class to be used for weapons
  */
-public abstract class Weapon extends InteractableObject {
+public abstract class Consumables extends InteractableObject {
 
     /**
      * The attack behaviour of the weapon
@@ -21,10 +21,9 @@ public abstract class Weapon extends InteractableObject {
     /**
      * Constructor for the Weapon class
      */
-    public Weapon(String name, String description, AttackBehaviour attackBehaviour) 
+    public Consumables(String name, String description) 
     {
         super(name, description);
-        this.attackBehaviour = attackBehaviour;
     }
 
     /** Called when the player interacts with this object
@@ -46,7 +45,7 @@ public abstract class Weapon extends InteractableObject {
                     owner = sender;
                 }
             }
-            case "use" -> attackBehaviour.attack(sender);
+           // case "use" -> consumeBehaviour.attack(sender);
             case "drop" -> {
                 // make the character drop the object
                 sender.drop(this);
