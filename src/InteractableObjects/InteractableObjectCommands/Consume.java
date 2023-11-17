@@ -2,7 +2,6 @@ package InteractableObjects.InteractableObjectCommands;
 
 import Characters.Character;
 import InteractableObjects.Consumables.Consumable;
-import InteractableObjects.Weapons.Weapon;
 
 public class Consume implements InteractableObjectCommand{
     private final Consumable object;

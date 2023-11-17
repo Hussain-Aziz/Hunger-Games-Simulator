@@ -5,7 +5,6 @@ import InteractableObjects.Consumables.ConsumableBehaviours.ConsumableBehavior;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectCommands.*;
 import InteractableObjects.InteractableObjectCommands.Take;
-import InteractableObjects.Weapons.Attacks.AttackBehaviour;
 import Singletons.UI;
 
 import java.util.ArrayList;
@@ -50,7 +49,20 @@ public abstract class Consumable extends InteractableObject {
         }
     }
 
-    public void consume(Character sender) {
+    public final void consume(Character sender) {
+        openWrapping();
+        consumeObject();
+        throwWrapping();
+        realizeEffects(sender);
+    }
+
+    protected abstract void throwWrapping();
+
+    protected abstract void consumeObject();
+
+    protected abstract void openWrapping();
+
+    public void realizeEffects(Character sender) {
         consumableBehavior.consume(sender);
     }
 }
