@@ -1,14 +1,15 @@
 package InteractableObjects.InteractableObjectCommands;
 
 import Characters.Character;
+import InteractableObjects.Enviornment.EnvironmentObject;
 import Sensors.TCP;
 
-public class ClimbTree implements InteractableObjectCommand{
+public class RunMountain implements InteractableObjectCommand{
 
 	private TCP tcp;
 	
 	
-    public ClimbTree(TCP tcp) {
+    public RunMountain(TCP tcp) {
     	
     	this.tcp = tcp;
     }
@@ -29,8 +30,3 @@ public class ClimbTree implements InteractableObjectCommand{
         return "use";
     }
 }
-
-
-
-// until sensor doesn't give correct ouput
-// wait

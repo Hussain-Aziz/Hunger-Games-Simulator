@@ -4,6 +4,7 @@ import Characters.MainCharacterCommands.CharacterCommand;
 import Characters.MainCharacterCommands.*;
 import Enums.Direction;
 import InteractableObjects.InteractableObject;
+import InteractableObjects.Enviornment.EnvironmentObject;
 import Scenes.Position;
 import Singletons.UI;
 

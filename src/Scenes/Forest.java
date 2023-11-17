@@ -17,8 +17,8 @@ public class Forest extends Scene {
                 	
                     put(new Dagger(), new Position(0, 0));
                    //put(new Environment("Forest", "Forest description"), new Position(3,3));
-                    put(new Tree("Forest", "Forest description"), new Position(2,3));
-                    put(new Tree("Forest", "Forest description"), new Position(3,2));
+//                    put(new Tree("Forest", "Forest description"), new Position(2,3));
+//                    put(new Tree("Forest", "Forest description"), new Position(3,2));
                 }},
                 new HashMap<Character, Position>() {{
                 }});

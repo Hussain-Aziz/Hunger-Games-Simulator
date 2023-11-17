@@ -2,6 +2,7 @@ package InteractableObjects.Enviornment;
 
 import Characters.Character;
 import InteractableObjects.InteractableObject;
+import InteractableObjects.InteractableObjectCommands.ClimbMountain;
 import InteractableObjects.InteractableObjectCommands.ClimbTree;
 import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
 
@@ -12,8 +13,10 @@ public abstract class EnvironmentObject extends InteractableObject {
     private final ArrayList<InteractableObjectCommand> commands;
     private final HashMap<String, Integer> commandMap;
 
+    
+
     public EnvironmentObject(String name, String description, InteractableObjectCommand interactableObjectCommand) {
-        super(name, description);
+    	super(name, description);
 
         commands = new ArrayList<>();
         commands.add(interactableObjectCommand);
@@ -22,9 +25,9 @@ public abstract class EnvironmentObject extends InteractableObject {
         for(InteractableObjectCommand command : commands) {
             commandMap.put(command.getName(), commands.indexOf(command));
         }
-    }
+	}
 
-    @Override
+	@Override
     public void interact(Character sender, String command) {
         if (commandMap.containsKey(command)) {
             commands.get(commandMap.get(command)).execute(sender);
