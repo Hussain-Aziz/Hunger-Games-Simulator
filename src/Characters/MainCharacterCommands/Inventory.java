@@ -16,8 +16,8 @@ public class Inventory implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "inventory";
+    public String[] getAliases() {
+        return new String[]{"inventory", "inv"};
     }
 
     @Override

@@ -25,8 +25,8 @@ public class Move implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "move";
+    public String[] getAliases() {
+        return new String[]{"move", "go", "walk"};
     }
 
     @Override

@@ -15,8 +15,8 @@ public class LookAround implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "lookaround";
+    public String[] getAliases() {
+        return new String[]{"lookaround", "overview"};
     }
 
     @Override

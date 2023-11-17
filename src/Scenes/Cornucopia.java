@@ -18,6 +18,7 @@ public class Cornucopia extends Scene {
                 new HashMap<InteractableObject, Position>() {{
                     put(new Dagger(), new Position(0, 0));
                     put(new Fish(), new Position(0, 0));
+                    put(new Tree(), new Position(0, 1));
 
                    // put(new LargePotion, new Position(0,1))          			ADDING THE CONSUMABLE TO THE MAP(CORNUCOPIA)
                 }},

@@ -16,8 +16,8 @@ public class Quit implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "quit";
+    public String[] getAliases() {
+        return new String[]{"quit"};
     }
 
     @Override

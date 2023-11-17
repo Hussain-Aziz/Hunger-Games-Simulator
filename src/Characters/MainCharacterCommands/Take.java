@@ -28,8 +28,8 @@ public class Take implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "take";
+    public String[] getAliases() {
+        return new String[]{"take", "grab", "pickup"};
     }
 
     @Override

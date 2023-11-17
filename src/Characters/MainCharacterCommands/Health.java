@@ -15,8 +15,8 @@ public class Health implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "health";
+    public String[] getAliases() {
+        return new String[]{"health", "hp", "life"};
     }
 
     @Override

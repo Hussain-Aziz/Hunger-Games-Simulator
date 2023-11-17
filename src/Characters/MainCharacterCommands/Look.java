@@ -15,8 +15,8 @@ public class Look implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "look";
+    public String[] getAliases() {
+        return new String[]{"look", "lookat"};
     }
 
     @Override

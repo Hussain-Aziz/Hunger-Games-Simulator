@@ -4,10 +4,10 @@ import Characters.Katniss;
 import InteractableObjects.InteractableObject;
 import Singletons.UI;
 
-public class Use implements CharacterCommand {
+public class Inspect implements CharacterCommand {
     private final Katniss katniss;
 
-    public Use(Katniss katniss) {
+    public Inspect(Katniss katniss) {
         this.katniss = katniss;
     }
     @Override
@@ -18,7 +18,7 @@ public class Use implements CharacterCommand {
         }
         for (InteractableObject object: katniss.getInventory()) {
             if (object.getName().toLowerCase().equals(args[1])) {
-                object.interact(katniss, "use");
+                object.interact(katniss, "inspect");
                 return;
             }
         }
@@ -26,7 +26,7 @@ public class Use implements CharacterCommand {
 
     @Override
     public String[] getAliases() {
-        return new String[]{"use", "attack", "consume", "eat"};
+        return new String[]{"inspect", "examine"};
     }
 
     @Override

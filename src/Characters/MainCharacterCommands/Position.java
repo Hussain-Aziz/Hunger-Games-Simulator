@@ -15,8 +15,8 @@ public class Position implements CharacterCommand {
     }
 
     @Override
-    public String getName() {
-        return "position";
+    public String[] getAliases() {
+        return new String[]{"position", "pos"};
     }
 
     @Override

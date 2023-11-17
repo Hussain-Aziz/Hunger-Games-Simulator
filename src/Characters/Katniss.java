@@ -3,6 +3,7 @@ package Characters;
 import Characters.MainCharacterCommands.CharacterCommand;
 import Characters.MainCharacterCommands.*;
 import Enums.Direction;
+import InteractableObjects.Enviornment.EnvironmentObject;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.Enviornment.EnvironmentObject;
 import Scenes.Position;
@@ -33,11 +34,15 @@ public class Katniss extends Character implements MainCharacter, Runnable {
         commands.add(new LookAround(this));
         commands.add(new Use(this));
         commands.add(new Characters.MainCharacterCommands.Position(this));
+        commands.add(new Drop(this));
+        commands.add(new Inspect(this));
         commands.add(new Quit(this));
 
         commandMap = new HashMap<>();
         for(CharacterCommand command : commands) {
-            commandMap.put(command.getName(), commands.indexOf(command));
+            for (String alias : command.getAliases()) {
+                commandMap.put(alias, commands.indexOf(command));
+            }
         }
 
         this.thread = new Thread(this);
@@ -67,9 +72,11 @@ public class Katniss extends Character implements MainCharacter, Runnable {
                 if (inputs.length == 2) {
                     boolean found = false;
                     for(CharacterCommand command : commands) {
-                        if (command.getName().equals(inputs[1])) {
-                            ui.print(command.getDescription());
-                            found = true;
+                        for (String alias : command.getAliases()) {
+                            if (alias.equals(inputs[1])) {
+                                ui.print(command.getDescription());
+                                found = true;
+                            }
                         }
                     }
                     if (!found) {
@@ -77,11 +84,16 @@ public class Katniss extends Character implements MainCharacter, Runnable {
                     }
                 }
                 else {
-                    String availableCommands = "";
+                    String availableCommands = "Available commands:\n";
                     for (CharacterCommand command : commands) {
-                        availableCommands += command.getName() + ", ";
+                        availableCommands += "\t- ";
+                        for (String alias : command.getAliases()) {
+                            availableCommands += alias + "/";
+                        }
+                        availableCommands = availableCommands.substring(0, availableCommands.length() - 1); // remove last /
+                        availableCommands += "\n";
                     }
-                    ui.print("Available commands:" + availableCommands);
+                    ui.print(availableCommands);
                 }
             }
             else {
