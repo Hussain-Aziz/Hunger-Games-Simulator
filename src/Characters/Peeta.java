@@ -16,14 +16,7 @@ public class Peeta extends NPC {
     }
 
     @Override
-    public void mainLoop() throws InterruptedException {
-        while (true) {
-            Thread.sleep(10000);
-        }
-    }
-
-    @Override
-    public void interract() {
+    public void interact() {
         UI.getInstance().print("Hello, I'm Peeta Mellark. Stay away from me");
     }
 }

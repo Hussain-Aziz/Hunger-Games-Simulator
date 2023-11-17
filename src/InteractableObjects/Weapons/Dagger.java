@@ -7,6 +7,6 @@ public class Dagger extends Weapon {
     public Dagger() {
         super("Dagger",
                 "A short blade that can be used to stab foes",
-                new MeleeAttack(1, 1));
+                new MeleeAttack(1));
     }
 }

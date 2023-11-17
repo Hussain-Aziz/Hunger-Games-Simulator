@@ -1,5 +1,7 @@
 package Characters;
 
+import Characters.CharacterStates.CharacterState;
+import Characters.CharacterStates.Dormant;
 import InteractableObjects.InteractableObject;
 import Scenes.Position;
 
@@ -10,10 +12,7 @@ import java.util.ArrayList;
  */
 public abstract class NPC extends Character {
 
-    /**
-     * The maximum number of items that the NPC can hold in their inventory
-     */
-    protected final static int MAX_INVENTORY_SIZE = 2;
+    private CharacterState state = new Dormant();
 
     /**
      * The inventory of the NPC
@@ -33,20 +32,20 @@ public abstract class NPC extends Character {
     }
 
     /**
-     * A function to be implemented that handles interaction with NPCs
-     */
-    public abstract void interract();
-
-    /**
      * Adds an object to the inventory of the NPC
      */
     public boolean take(InteractableObject object, Position position) {
-        if (MAX_INVENTORY_SIZE > inventory.size()) {
-            inventory.add(object);
-            return true;
-        } else {
-            return false;
-        }
+        // NPC's cant take stuff
+        return false;
+    }
+
+    public abstract void interact();
+
+    public String giveItem() {
+        if (inventory.isEmpty()) return null;
+        String name = inventory.get(0).getName();
+        inventory.get(0).interact(this, "drop");
+        return name;
     }
 
     /**
@@ -54,5 +53,15 @@ public abstract class NPC extends Character {
      */
     public void drop(InteractableObject object) {
         inventory.remove(object);
+    }
+
+    public void nextState() {
+        state.next(this);
+    }
+    public void prevState(){
+        state.prev(this);
+    }
+    public void setState(CharacterState state) {
+        this.state = state;
     }
 }

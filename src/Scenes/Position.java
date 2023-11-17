@@ -28,6 +28,14 @@ public class Position {
     public boolean isInContact(Position position, int range) {
         return Math.abs(position.x - x) <= range && Math.abs(position.y - y) <= range;
     }
+    /**
+     * Returns true if the current position and the given position are equal to a range
+     * Example: if current position is (0, 0) and the given position is (2, 2) and the range is 2, then the function returns true
+     * Example: if current position is (0, 0) and the given position is (1, 1) and the range is 2, then the function returns false
+     */
+    public boolean IsInExactContact(Position position, int range) {
+        return Math.abs(position.x - x) == range && Math.abs(position.y - y) == range;
+    }
 
     /**
      * Returns a new position with the same coordinates
@@ -55,5 +63,14 @@ public class Position {
     }
     public int getX() {
         return x;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+
+    public boolean isEqual(Position position) {
+        return position.getX() == x && position.getY() == y;
     }
 }

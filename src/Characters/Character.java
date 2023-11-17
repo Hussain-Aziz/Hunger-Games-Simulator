@@ -3,8 +3,6 @@ package Characters;
 import java.util.ArrayList;
 
 import Enums.Direction;
-import InteractableObjects.Environment;
-import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectOwner;
 import MessageArchitecture.Message;
 import MessageArchitecture.Observer;
@@ -15,11 +13,8 @@ import Singletons.UI;
 /**
  * The base class for all characters in the game
  */
-public abstract class Character implements Runnable, InteractableObjectOwner, Subject {
-    /**
-     * The thread that the character runs on
-     */
-    private final Thread thread;
+public abstract class Character implements InteractableObjectOwner, Subject {
+
     /**
      * The random number generator for the character
      */
@@ -46,16 +41,7 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
         this.name = name;
         this.health = health;
         observers = new ArrayList <Observer>();
-
-        this.thread = new Thread(this);
-        this.thread.start();
     }
-
-    /**
-     * A function to be implemented that will be the main loop of the character
-     * use it to make characters move around the map and interact with objects
-     */
-    protected abstract void mainLoop() throws InterruptedException;
 
     /**
      * Moves the character in a direction
@@ -69,36 +55,7 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
             case east -> newPosition.setX(newPosition.getX() + 1);
             case west -> newPosition.setX(newPosition.getX() - 1);
         }
-        if ((newPosition.getY() >= 2 && newPosition.getX() >= 2) && (newPosition.getY() != 2 && newPosition.getX() != 2))
-        {
-        	Scene forestScene = Singletons.SceneManager.getInstance().getAdjacentScene(currentScene, direction);
-        	if (forestScene != null)
-        	{
-        		forestScene.characterEntry(this, direction);
-        		setCurrentScene(forestScene);
-        		Environment forestEnvironment = forestScene.getEnv();
-        		forestEnvironment.interact(this, "Climb");
-        		//UI.getInstance().print("Player is in the forest !\n ");
-        	}
-        	
-        	
-        	//TODO: do the same but for cornucopia and mountain area ....
-        }
         currentScene.moveCharacter(this, newPosition);
-        
-       // InteractableObject ObjectsAtNewPosition = currentScene.getInteractableObjectAtPosition(newPosition); 					  ()()()
-    
-    }
-
-    /**
-     * Implementation of the run function from the Runnable interface
-     */
-    public void run() {
-        try {
-            mainLoop();
-        } catch (InterruptedException e) {
-            UI.getInstance().print(e);
-        }
     }
 
     /**
@@ -107,10 +64,6 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
      */
     public void setCurrentScene(Scene currentScene) {
         this.currentScene = currentScene;
-    }
-
-    protected Thread getThread() {
-        return thread;
     }
     public Scene getCurrentScene() {
         return currentScene;
@@ -128,7 +81,7 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
         }
     }
     
-   /* public void Heal(int damage) {
+   public void heal(int damage) {
         health -= damage;
         if (health == 1) {
         	publishMessage(new Message(this, "health", "low health"));
@@ -136,7 +89,7 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
         else if (health == 0) {
         	publishMessage(new Message(this, "health", "death"));
         }
-    }*/
+    }
     
     public String getName() {
         return name;
@@ -159,4 +112,12 @@ public abstract class Character implements Runnable, InteractableObjectOwner, Su
 			observers.get(i); observer.update(m);
 		}
 	}
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
 }

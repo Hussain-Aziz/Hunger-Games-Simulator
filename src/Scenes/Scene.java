@@ -1,11 +1,11 @@
 package Scenes;
 
 import Characters.Character;
-import Characters.Environment;
 import Characters.MainCharacter;
 import Enums.Direction;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectOwner;
+import InteractableObjects.Enviornment.Tree;
 import Singletons.SceneManager;
 import Singletons.UI;
 
@@ -73,12 +73,57 @@ public abstract class Scene implements InteractableObjectOwner {
             output += "\t" + object.getName() + "\n";
         }
         for (Character character : characters.keySet()) {
+            if (character instanceof MainCharacter)
+                continue;
             output += "\t" + character.getName() + "\n";
         }
         return output;
     }
 
-    //TODO: print objects near player
+    public ArrayList<InteractableObject> getNearbyObjects(Character character) {
+        ArrayList<InteractableObject> nearbyObjects = new ArrayList<>();
+        for (InteractableObject object : interactableObjects.keySet()) {
+            if (interactableObjects.get(object).isEqual(characters.get(character))) {
+                nearbyObjects.add(object);
+            }
+        }
+        return nearbyObjects;
+    }
+
+    // there is only 1 other character in a scene
+    public Character getNearbyCharacter(Character character) {
+        ArrayList<Character> nearbyCharacters = new ArrayList<>();
+        for (Character otherCharacter : characters.keySet()) {
+            if (otherCharacter != character && characters.get(otherCharacter).isEqual(characters.get(character))) {
+                return otherCharacter;
+            }
+        }
+        return null;
+    }
+
+    public void printNearby(Character character) {
+        String output = "";
+        var nearbyObjects = getNearbyObjects(character);
+        var nearbyCharacter = getNearbyCharacter(character);
+
+        if (!nearbyObjects.isEmpty()) {
+            output += "You are standing on:\n";
+            for (InteractableObject object : nearbyObjects) {
+                output += "\t" + object.getName() + "\n";
+            }
+        }
+        if (nearbyCharacter != null) {
+            if (!nearbyObjects.isEmpty())
+                output += "You also see: ";
+            output += nearbyCharacter.getName() + " is waiting here\n";
+        }
+
+        if (nearbyObjects.isEmpty() && nearbyCharacter == null) {
+            UI.getInstance().print("There is nothing nearby");
+        } else {
+            UI.getInstance().print(output);
+        }
+    }
     /**
      * Moves a character to a new position
      * If the new position is outside the scene, the character will exit the scene
@@ -154,5 +199,5 @@ public abstract class Scene implements InteractableObjectOwner {
         return characters;
     }
 
-	public abstract InteractableObjects.Environment getEnv();
+	public abstract Tree getEnv();
 }

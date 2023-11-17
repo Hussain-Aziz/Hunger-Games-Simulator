@@ -2,7 +2,7 @@ package Scenes;
 
 import Characters.Character;
 import InteractableObjects.Weapons.Dagger;
-import InteractableObjects.Environment;
+import InteractableObjects.Enviornment.Tree;
 import InteractableObjects.InteractableObject;
 
 import java.util.HashMap;
@@ -17,20 +17,20 @@ public class Forest extends Scene {
                 	
                     put(new Dagger(), new Position(0, 0));
                    //put(new Environment("Forest", "Forest description"), new Position(3,3));
-                    put(new Environment("Forest", "Forest description"), new Position(2,3));
-                    put(new Environment("Forest", "Forest description"), new Position(3,2));
+                    put(new Tree("Forest", "Forest description"), new Position(2,3));
+                    put(new Tree("Forest", "Forest description"), new Position(3,2));
                 }},
                 new HashMap<Character, Position>() {{
                 }});
     
     }
-    public Environment getEnv() {
+    public Tree getEnv() {
     	
     	for (InteractableObject currentObject: interactableObjects.keySet())
     	{
-    		if (currentObject instanceof Environment )
+    		if (currentObject instanceof Tree)
     		{
-    			return (Environment)currentObject;
+    			return (Tree)currentObject;
     		}
     	}
     	

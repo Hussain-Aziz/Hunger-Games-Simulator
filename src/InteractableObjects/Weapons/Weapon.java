@@ -2,10 +2,15 @@ package InteractableObjects.Weapons;
 
 import Characters.Character;
 import Characters.MainCharacter;
+import Characters.MainCharacterCommands.*;
 import InteractableObjects.InteractableObject;
+import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
 import InteractableObjects.Weapons.Attacks.AttackBehaviour;
 import Scenes.Position;
+import Singletons.UI;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,6 +18,8 @@ import java.util.Map;
  */
 public abstract class Weapon extends InteractableObject {
 
+    private final ArrayList<InteractableObjectCommand> commands;
+    private final HashMap<String, Integer> commandMap;
     /**
      * The attack behaviour of the weapon
      */
@@ -25,6 +32,18 @@ public abstract class Weapon extends InteractableObject {
     {
         super(name, description);
         this.attackBehaviour = attackBehaviour;
+
+        commands = new ArrayList<>();
+        commands.add(new InteractableObjects.InteractableObjectCommands.Take(this));
+        commands.add(new InteractableObjects.InteractableObjectCommands.Inspect(this));
+        commands.add(new InteractableObjects.InteractableObjectCommands.Destroy(this));
+        commands.add(new InteractableObjects.InteractableObjectCommands.Drop(this));
+        commands.add(new InteractableObjects.InteractableObjectCommands.Attack(this));
+
+        commandMap = new HashMap<>();
+        for(InteractableObjectCommand command : commands) {
+            commandMap.put(command.getName(), commands.indexOf(command));
+        }
     }
 
     /** Called when the player interacts with this object
@@ -33,33 +52,14 @@ public abstract class Weapon extends InteractableObject {
      */
     @Override
     public void interact(Character sender, String command) {
-        switch (command) {
-            case "inspect" -> Singletons.UI.getInstance().print(name, ":", description);
-            case "take" -> {
-                // make the character take the object
-                if (sender.take(this, null)) {
-
-                    // if successful, drop the object from the current scene
-                    owner.drop(this);
-
-                    // set the owner to the character
-                    owner = sender;
-                }
-            }
-            case "use" -> attackBehaviour.attack(sender);
-            case "drop" -> {
-                // make the character drop the object
-                sender.drop(this);
-
-                // set the owner to the scene where it was dropped
-                owner = sender.getCurrentScene();
-                owner.take(this, sender.getPosition());
-            }
-            case "destroy" -> {
-                // just drop the object without giving a new owner
-                sender.drop(this);
-            }
-            default -> Singletons.UI.getInstance().print("I can't do that with", name);
+        if (commandMap.containsKey(command)) {
+            commands.get(commandMap.get(command)).execute(sender);
+        } else {
+            Singletons.UI.getInstance().print("I can't do that with ", name);
         }
+    }
+
+    public void attack(Character sender) {
+        attackBehaviour.attack(sender);
     }
 }

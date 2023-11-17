@@ -6,10 +6,10 @@ import Scenes.Position;
 
 import java.util.Map;
 
-public class MeleeAttack implements AttackBehaviour {
+public class RangeAttack implements AttackBehaviour {
     private final int damage;
 
-    public MeleeAttack(int damage) {
+    public RangeAttack(int damage) {
         this.damage = damage;
     }
 
@@ -26,10 +26,10 @@ public class MeleeAttack implements AttackBehaviour {
             if (character == sender)
                 continue;
 
-            if (characterPosition.isInContact(position, 1)) {
+            if (characterPosition.IsInExactContact(position, 1)) {
                 character.takeDamage(damage);
                 // only do prints for main character
-                if (sender instanceof MainCharacter) {
+                if (!(sender instanceof MainCharacter)) {
                     Singletons.UI.getInstance().print("You hit", character.getName(), "for", damage, "damage");
                 }
             }

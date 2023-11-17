@@ -1,5 +1,6 @@
 package Singletons;
 
+import Characters.Character;
 import Enums.Direction;
 import Scenes.Cornucopia;
 import Scenes.Forest;
@@ -25,6 +26,8 @@ public class SceneManager {
      */
     private HashMap<Scene, HashMap<Direction, Scene>> adjacentScenes;
 
+    private Scene startScene;
+
     /**
      * Private constructor of the SceneManager class
      * Creates the scenes and adds them to the graph
@@ -34,6 +37,8 @@ public class SceneManager {
 
         var cornucopia = new Cornucopia();
         var forest = new Forest();
+
+        startScene = cornucopia;
 
         adjacentScenes.put(cornucopia, new HashMap<Direction, Scene>() {{
             put(Direction.north, forest);
@@ -58,6 +63,10 @@ public class SceneManager {
      */
     public ArrayList<Scene> getSceneList() {
         return new ArrayList<>(adjacentScenes.keySet());
+    }
+
+    public Scene getStartScene() {
+        return startScene;
     }
 
     /**
