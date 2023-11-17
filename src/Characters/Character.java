@@ -77,7 +77,8 @@ public abstract class Character implements InteractableObjectOwner, Subject {
         	publishMessage(new Message(this, "health", "low health"));
         }
         else if (health == 0) {
-        	publishMessage(new Message(this, "health", "death"));
+        	publishMessage(new Message(this, "death", name + " has dying"));
+            currentScene.killCharacter(this);
         }
     }
     
@@ -108,8 +109,8 @@ public abstract class Character implements InteractableObjectOwner, Subject {
 	
 	public void publishMessage(Message m) {
 		for (int i = 0; i < observers.size(); i++) {
-			Observer observer = (Observer)
-			observers.get(i); observer.update(m);
+			Observer observer = (Observer) observers.get(i);
+            observer.update(m);
 		}
 	}
 

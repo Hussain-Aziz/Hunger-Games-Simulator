@@ -64,4 +64,8 @@ public abstract class NPC extends Character {
     public void setState(CharacterState state) {
         this.state = state;
     }
+
+    public ArrayList<InteractableObject> getInventory() {
+        return inventory;
+    }
 }

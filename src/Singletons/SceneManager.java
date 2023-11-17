@@ -76,4 +76,12 @@ public class SceneManager {
     public Scene getAdjacentScene(Scene currentScene, Direction exitDirection) {
         return adjacentScenes.get(currentScene).get(exitDirection);
     }
+
+    public ArrayList<Character> getAllCharacters() {
+        ArrayList<Character> allCharacters = new ArrayList<Character>();
+    	for (Scene scene : adjacentScenes.keySet()) {
+    		allCharacters.addAll(scene.getCharacters().keySet());
+    	}
+        return allCharacters;
+    }
 }

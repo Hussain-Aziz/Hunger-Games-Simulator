@@ -91,7 +91,7 @@ public abstract class Scene implements InteractableObjectOwner {
     }
 
     // there is only 1 other character in a scene
-    public Character getNearbyCharacter(Character character) {
+    public Character getNearbyNPC(Character character) {
         ArrayList<Character> nearbyCharacters = new ArrayList<>();
         for (Character otherCharacter : characters.keySet()) {
             if (otherCharacter != character && characters.get(otherCharacter).isEqual(characters.get(character))) {
@@ -104,7 +104,7 @@ public abstract class Scene implements InteractableObjectOwner {
     public void printNearby(Character character) {
         String output = "";
         var nearbyObjects = getNearbyObjects(character);
-        var nearbyCharacter = getNearbyCharacter(character);
+        var nearbyCharacter = getNearbyNPC(character);
 
         if (!nearbyObjects.isEmpty()) {
             output += "You are standing on:\n";
@@ -156,6 +156,10 @@ public abstract class Scene implements InteractableObjectOwner {
                 UI.getInstance().print("You can't go that way");
             }
         }
+    }
+
+    public void killCharacter(Character character) {
+        characters.remove(character);
     }
 
     /**

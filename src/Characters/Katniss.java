@@ -5,12 +5,12 @@ import Characters.MainCharacterCommands.*;
 import Enums.Direction;
 import InteractableObjects.Enviornment.EnvironmentObject;
 import InteractableObjects.InteractableObject;
-import InteractableObjects.Enviornment.EnvironmentObject;
 import Scenes.Position;
 import Singletons.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Katniss extends Character implements MainCharacter, Runnable {
 
@@ -18,6 +18,7 @@ public class Katniss extends Character implements MainCharacter, Runnable {
     private final ArrayList<CharacterCommand> commands;
     private final HashMap<String, Integer> commandMap;
     protected ArrayList<InteractableObject> inventory;
+    protected final Random random = new Random();
     protected final static int MAX_INVENTORY_SIZE = 3;
 
     public Katniss() {
@@ -140,6 +141,16 @@ public class Katniss extends Character implements MainCharacter, Runnable {
         for(InteractableObject object : objects) {
             if (object instanceof EnvironmentObject) {
                 object.interact(this, "use");
+            }
+        }
+
+        var npc = (NPC) getCurrentScene().getNearbyNPC(this);
+        if (npc != null) {
+            UI.getInstance().print("You have encountered ", npc.getName());
+            if (random.nextBoolean()) {
+                npc.nextState();
+            } else {
+                npc.prevState();
             }
         }
     }

@@ -2,6 +2,7 @@ package InteractableObjects.Weapons.Attacks;
 
 import Characters.Character;
 import Characters.MainCharacter;
+import MessageArchitecture.Message;
 import Scenes.Position;
 
 import java.util.Map;
@@ -28,10 +29,12 @@ public class MeleeAttack implements AttackBehaviour {
 
             if (characterPosition.isInContact(position, 1)) {
                 character.takeDamage(damage);
-                // only do prints for main character
-                if (sender instanceof MainCharacter) {
-                    Singletons.UI.getInstance().print("You hit", character.getName(), "for", damage, "damage");
-                }
+                sender.publishMessage(new Message(sender, "damage", damage + " damage to " + character.getName()));
+
+                // required to return because we may edit the hashmap which throw exception if we try to continue looping
+                // so a patch fix to just not loop anymore
+                // anyways theres never more than 1 character in a scene so it's fine
+                return;
             }
         }
     }

@@ -3,9 +3,11 @@ package MessageArchitecture;
 import Characters.Character;
 import Singletons.UI;
 
+import java.util.ArrayList;
+
 public class Narrator extends ConcreteObserver {
 	
-	public Narrator(Character[] subject) {
+	public Narrator(ArrayList<Character> subject) {
 		super(subject);
 	}
 	
@@ -17,7 +19,13 @@ public class Narrator extends ConcreteObserver {
 				//Outputs the character's name, need to add narration regarding health 
 			}
 			case "death" -> {
-				//narration regarding character's death
+				UI.getInstance().print("Narrator: unfortunate events have lead to " + m.payload);
+			}
+			case "damage" -> {
+				UI.getInstance().print("Narrator: " + ((Character) m.origin).getName() + " has done " + m.payload);
+			}
+			default -> {
+				UI.getInstance().print("Narrator: " + m.payload);
 			}
 		}
 	}

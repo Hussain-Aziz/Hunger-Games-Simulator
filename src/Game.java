@@ -24,10 +24,8 @@ public class Game {
         var startingScene = SceneManager.getInstance().getStartScene();
         Character mainCharacter = new Katniss();
         startingScene.characterEntry(mainCharacter, Direction.north);
-        
-        // create narrator and add characters as subjects
-        Character[] characters = {mainCharacter};
-        Narrator narrator = new Narrator(characters);
 
+        // create narrator and add characters as subjects
+        Narrator narrator = new Narrator(SceneManager.getInstance().getAllCharacters());
     }
 }

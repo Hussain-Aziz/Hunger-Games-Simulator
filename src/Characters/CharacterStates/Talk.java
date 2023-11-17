@@ -4,23 +4,16 @@ import Characters.NPC;
 import Singletons.UI;
 
 public class Talk implements CharacterState {
-
+    public Talk(NPC npc) {
+        npc.interact();
+    }
     @Override
     public void prev(NPC npc) {
-        npc.setState(new Dormant());
+        npc.setState(new Attack(npc));
     }
 
     @Override
     public void next(NPC npc) {
-        npc.setState(new Attack());
-    }
-
-    @Override
-    public void executeStateAction(NPC npc) {
-        npc.interact();
-        String itemName = npc.giveItem();
-        if (itemName != null) {
-            UI.getInstance().print("Take this " + itemName);
-        }
+        npc.setState(new Give(npc));
     }
 }
