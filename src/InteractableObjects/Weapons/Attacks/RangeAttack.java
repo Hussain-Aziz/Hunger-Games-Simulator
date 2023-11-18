@@ -7,6 +7,9 @@ import Scenes.Position;
 
 import java.util.Map;
 
+/*
+ * Does damage to all sqaures around you but not on the one you are standing on
+ */
 public class RangeAttack implements AttackBehaviour {
     private final int damage;
 
@@ -27,7 +30,7 @@ public class RangeAttack implements AttackBehaviour {
             if (character == sender)
                 continue;
 
-            if (characterPosition.IsInExactContact(position, 2)) {
+            if (characterPosition.IsInExactContact(position, 1)) {
                 character.takeDamage(damage);
                 sender.publishMessage(new Message(sender, "damage", damage + " damage to " + character.getName()));
 

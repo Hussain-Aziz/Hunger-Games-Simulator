@@ -4,6 +4,7 @@ import Characters.Character;
 import InteractableObjects.Consumables.ConsumableBehaviours.ConsumableBehavior;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectCommands.*;
+import InteractableObjects.InteractableObjectCommands.SensorCommands.Consume;
 import InteractableObjects.InteractableObjectCommands.Take;
 import Singletons.UI;
 

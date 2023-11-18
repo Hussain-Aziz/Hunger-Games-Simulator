@@ -2,7 +2,6 @@ package InteractableObjects.Enviornment;
 
 import Characters.Character;
 import InteractableObjects.InteractableObject;
-import InteractableObjects.InteractableObjectCommands.ClimbTree;
 import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
 
 import java.util.ArrayList;

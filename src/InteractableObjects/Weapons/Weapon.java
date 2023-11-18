@@ -1,17 +1,13 @@
 package InteractableObjects.Weapons;
 
 import Characters.Character;
-import Characters.MainCharacter;
-import Characters.MainCharacterCommands.*;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
+import InteractableObjects.InteractableObjectCommands.SensorCommands.Attack;
 import InteractableObjects.Weapons.Attacks.AttackBehaviour;
-import Scenes.Position;
-import Singletons.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A template class to be used for weapons
@@ -38,7 +34,7 @@ public abstract class Weapon extends InteractableObject {
         commands.add(new InteractableObjects.InteractableObjectCommands.Inspect(this));
         commands.add(new InteractableObjects.InteractableObjectCommands.Destroy(this));
         commands.add(new InteractableObjects.InteractableObjectCommands.Drop(this));
-        commands.add(new InteractableObjects.InteractableObjectCommands.Attack(this));
+        commands.add(new Attack(this));
 
         commandMap = new HashMap<>();
         for(InteractableObjectCommand command : commands) {

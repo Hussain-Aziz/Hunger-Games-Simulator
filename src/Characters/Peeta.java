@@ -1,5 +1,6 @@
 package Characters;
 
+import InteractableObjects.Consumables.Berry;
 import InteractableObjects.Weapons.Dagger;
 import InteractableObjects.InteractableObject;
 import Singletons.UI;
@@ -12,6 +13,9 @@ public class Peeta extends NPC {
                 2,
                 new ArrayList<InteractableObject>() {{
                     add(new Dagger());
+                    add(new Berry());
+                    add(new Berry());
+                    add(new Berry());
                 }});
     }
 

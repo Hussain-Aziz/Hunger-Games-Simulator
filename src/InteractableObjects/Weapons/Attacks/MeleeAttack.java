@@ -6,7 +6,9 @@ import MessageArchitecture.Message;
 import Scenes.Position;
 
 import java.util.Map;
-
+/*
+ * Does damage to all sqaures around you including the one you are standing on
+ */
 public class MeleeAttack implements AttackBehaviour {
     private final int damage;
 

@@ -84,12 +84,7 @@ public abstract class Character implements InteractableObjectOwner, Subject {
     
    public void heal(int health) {
         this.health += health;
-        if (this.health == 1) {
-        	publishMessage(new Message(this, "health", "low health"));
-        }
-        else if (this.health == 0) {
-        	publishMessage(new Message(this, "health", "death"));
-        }
+        publishMessage(new Message(this, "heal", "healed by " + health + " health"));
     }
     
     public String getName() {

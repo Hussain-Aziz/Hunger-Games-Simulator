@@ -1,6 +1,7 @@
 import Characters.Katniss;
 import Characters.Character;
 import Enums.Direction;
+import Sensors.SensorManager;
 import Singletons.SceneManager;
 import Singletons.UI;
 import MessageArchitecture.Narrator;
@@ -16,6 +17,7 @@ public class Game {
         // initialize singletons
         UI.getInstance();
         SceneManager.getInstance();
+        SensorManager.getInstance();
 
         UI.getInstance().print("Welcome to the Hunger Games!");
         UI.getInstance().print("You will now be dropped into the arena.");
