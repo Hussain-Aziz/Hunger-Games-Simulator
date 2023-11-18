@@ -2,14 +2,14 @@ package Characters;
 
 import java.util.ArrayList;
 
-import Enums.Direction;
+import Scenes.Direction;
 import InteractableObjects.InteractableObjectOwner;
 import MessageArchitecture.Message;
 import MessageArchitecture.Observer;
 import MessageArchitecture.Subject;
 import Scenes.Position;
 import Scenes.Scene;
-import Singletons.UI;
+
 /**
  * The base class for all characters in the game
  */

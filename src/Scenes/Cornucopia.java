@@ -26,10 +26,4 @@ public class Cornucopia extends Scene {
                     put(new Peeta(), new Position(1, 0));
                 }});
     }
-
-	@Override
-	public Tree getEnv() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -2,9 +2,8 @@ package InteractableObjects.InteractableObjectCommands.SensorCommands;
 
 import Characters.Character;
 import InteractableObjects.Consumables.Consumable;
-import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
-import Sensors.SensorBehaviours.Healing;
-import Sensors.SensorManager;
+import Singletons.SensorBehaviours.*;
+import Singletons.*;
 
 public class Consume extends SensorCommand {
     private final Consumable object;

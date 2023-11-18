@@ -10,7 +10,7 @@ public class Attack implements CharacterState {
     public Attack(NPC npc) {
         for (InteractableObject object : npc.getInventory()) {
             if (object instanceof Weapon) {
-                UI.getInstance().print("I will attack you with ", object.getName());
+                UI.getInstance().print(npc.getName(), ": I will attack you with", object.getName());
                 ((Weapon) object).attack(npc);
             }
         }

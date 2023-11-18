@@ -1,4 +1,4 @@
-package Enums;
+package Scenes;
 
 /**
  * Direction enum for movement

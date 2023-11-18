@@ -2,9 +2,10 @@ package Characters;
 
 import Characters.MainCharacterCommands.CharacterCommand;
 import Characters.MainCharacterCommands.*;
-import Enums.Direction;
+import Scenes.Direction;
 import InteractableObjects.Enviornment.EnvironmentObject;
 import InteractableObjects.InteractableObject;
+import MessageArchitecture.Message;
 import Scenes.Position;
 import Singletons.UI;
 
@@ -34,6 +35,7 @@ public class Katniss extends Character implements MainCharacter, Runnable {
         commands.add(new Health(this));
         commands.add(new LookAround(this));
         commands.add(new Use(this));
+        commands.add(new Interact(this));
         commands.add(new Characters.MainCharacterCommands.Position(this));
         commands.add(new Drop(this));
         commands.add(new Inspect(this));
@@ -144,18 +146,22 @@ public class Katniss extends Character implements MainCharacter, Runnable {
             }
         }
 
-        var npc = (NPC) getCurrentScene().getNearbyNPC(this);
+        var npc = getCurrentScene().getNearbyNPC(this);
         if (npc != null) {
-            UI.getInstance().print("You have encountered ", npc.getName());
-            if (random.nextBoolean()) {
-                npc.nextState();
-            } else {
-                npc.prevState();
-            }
+            UI.getInstance().print("You have encountered", npc.getName());
+            publishMessage(new Message(this, "meet", ""));
         }
     }
 
     public void die() {
         health = 0;
+    }
+
+    public void usedWeapon() {
+        publishMessage(new Message(this, "attack", ""));
+    }
+
+    public void interactWithNPC(NPC npc) {
+        npc.changeState();
     }
 }

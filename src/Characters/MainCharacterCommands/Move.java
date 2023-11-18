@@ -1,7 +1,7 @@
 package Characters.MainCharacterCommands;
 
 import Characters.Katniss;
-import Enums.Direction;
+import Scenes.Direction;
 import Singletons.UI;
 
 public class Move implements CharacterCommand {

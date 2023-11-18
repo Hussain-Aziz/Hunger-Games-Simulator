@@ -1,7 +1,6 @@
 package InteractableObjects.Weapons.Attacks;
 
 import Characters.Character;
-import Characters.MainCharacter;
 import MessageArchitecture.Message;
 import Scenes.Position;
 
@@ -30,7 +29,7 @@ public class RangeAttack implements AttackBehaviour {
             if (character == sender)
                 continue;
 
-            if (characterPosition.IsInExactContact(position, 1)) {
+            if (characterPosition.IsInRangeContact(position, 1)) {
                 character.takeDamage(damage);
                 sender.publishMessage(new Message(sender, "damage", damage + " damage to " + character.getName()));
 

@@ -1,4 +1,4 @@
-package Sensors.SensorBehaviours;
+package Singletons.SensorBehaviours;
 
 import org.json.simple.JSONObject;
 

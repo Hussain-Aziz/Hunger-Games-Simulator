@@ -1,11 +1,10 @@
 package Characters.CharacterStates;
 
 import Characters.NPC;
-import Singletons.UI;
 
 public class Talk implements CharacterState {
     public Talk(NPC npc) {
-        npc.interact();
+        npc.talk();
     }
     @Override
     public void prev(NPC npc) {

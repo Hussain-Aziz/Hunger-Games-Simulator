@@ -2,7 +2,7 @@ package Scenes;
 
 import Characters.Character;
 import Characters.MainCharacter;
-import Enums.Direction;
+import Characters.NPC;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectOwner;
 import InteractableObjects.Enviornment.Tree;
@@ -91,11 +91,13 @@ public abstract class Scene implements InteractableObjectOwner {
     }
 
     // there is only 1 other character in a scene
-    public Character getNearbyNPC(Character character) {
+    public NPC getNearbyNPC(Character character) {
         ArrayList<Character> nearbyCharacters = new ArrayList<>();
         for (Character otherCharacter : characters.keySet()) {
-            if (otherCharacter != character && characters.get(otherCharacter).isEqual(characters.get(character))) {
-                return otherCharacter;
+            var otherCharacterPos = characters.get(otherCharacter);
+            var requesterPos = characters.get(character);
+            if (otherCharacter != character && otherCharacterPos.isEqual(requesterPos)) {
+                return (NPC) otherCharacter;
             }
         }
         return null;
@@ -202,6 +204,4 @@ public abstract class Scene implements InteractableObjectOwner {
     public HashMap<Character, Position> getCharacters() {
         return characters;
     }
-
-	public abstract Tree getEnv();
 }

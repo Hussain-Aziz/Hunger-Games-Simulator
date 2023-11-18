@@ -1,11 +1,9 @@
 package InteractableObjects.InteractableObjectCommands.SensorCommands;
 
 import Characters.Character;
-import InteractableObjects.Consumables.Consumable;
 import InteractableObjects.Weapons.Weapon;
-import Sensors.SensorBehaviours.Healing;
-import Sensors.SensorBehaviours.Swinging;
-import Sensors.SensorManager;
+import Singletons.*;
+import Singletons.SensorBehaviours.*;
 
 public class Attack extends SensorCommand {
     private final Weapon object;

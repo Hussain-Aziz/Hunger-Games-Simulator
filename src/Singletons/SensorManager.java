@@ -1,24 +1,26 @@
-package Sensors;
+package Singletons;
 
-import Sensors.SensorBehaviours.SensorBehaviour;
+import Singletons.*;
+import Singletons.SensorBehaviours.*;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class SensorManager implements Runnable
 {
 	private final String host = "192.168.1.14";
 	private final int port = 26950;
 	private final JSONParser parser = new JSONParser();
-
 	private static SensorManager instance = null;
 	private SensorBehaviour sensorBehaviour;
+
+	private boolean isRunning = false;
 
 	private SensorManager()
 	{
@@ -34,11 +36,18 @@ public class SensorManager implements Runnable
 	}
 
 	public void setSensorBehaviour(SensorBehaviour sensorBehaviour) {
+		if (isRunning) {
+			warnServerNotRunning();
+			return;
+		}
 		this.sensorBehaviour = sensorBehaviour;
 	}
 
 	public void run() {
-		try (Socket socket = new Socket(this.host, this.port)){
+		try (Socket socket = new Socket(this.host, this.port)) {
+
+			isRunning = true;
+
 			InputStream input = socket.getInputStream();
 			InputStreamReader reader = new InputStreamReader(input);
 
@@ -56,10 +65,16 @@ public class SensorManager implements Runnable
 				}
 			}
 		} catch (IOException ex) {
-			throw new RuntimeException("Not able to connect to server: ");
-		} catch (Exception e) {
-			e.printStackTrace();
+			warnServerNotRunning();
+		} catch (ParseException e) {
+            UI.getInstance().printError("Not able to parse JSON from server", e);
+        } finally {
+			isRunning = false;
 		}
+	}
+
+	private void warnServerNotRunning() {
+		UI.getInstance().printError("Not able to connect to server. Please make sure the server is running.");
 	}
 
 	public boolean isStillRunning() {

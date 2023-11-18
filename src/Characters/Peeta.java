@@ -20,7 +20,7 @@ public class Peeta extends NPC {
     }
 
     @Override
-    public void interact() {
+    public void talk() {
         UI.getInstance().print("Hello, I'm Peeta Mellark. Stay away from me");
     }
 }

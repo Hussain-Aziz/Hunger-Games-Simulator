@@ -27,9 +27,6 @@ public class Narrator extends ConcreteObserver {
 			case "heal" -> {
 				UI.getInstance().print("Narrator: " + ((Character) m.origin).getName() + " has been " + m.payload);
 			}
-			default -> {
-				UI.getInstance().print("Narrator: " + m.payload);
-			}
 		}
 	}
 }

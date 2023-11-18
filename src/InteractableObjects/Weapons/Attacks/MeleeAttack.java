@@ -7,11 +7,10 @@ import Scenes.Position;
 
 import java.util.Map;
 /*
- * Does damage to all sqaures around you including the one you are standing on
+ * Does damage to the square you are standing on
  */
 public class MeleeAttack implements AttackBehaviour {
     private final int damage;
-
     public MeleeAttack(int damage) {
         this.damage = damage;
     }
@@ -29,7 +28,7 @@ public class MeleeAttack implements AttackBehaviour {
             if (character == sender)
                 continue;
 
-            if (characterPosition.isInContact(position, 1)) {
+            if (characterPosition.isInContact(position)) {
                 character.takeDamage(damage);
                 sender.publishMessage(new Message(sender, "damage", damage + " damage to " + character.getName()));
 

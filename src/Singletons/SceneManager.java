@@ -1,7 +1,7 @@
 package Singletons;
 
 import Characters.Character;
-import Enums.Direction;
+import Scenes.Direction;
 import Scenes.Cornucopia;
 import Scenes.Forest;
 import Scenes.Scene;

@@ -1,4 +1,4 @@
-package Sensors.SensorBehaviours;
+package Singletons.SensorBehaviours;
 
 import Singletons.UI;
 import org.json.simple.JSONArray;

@@ -31,6 +31,6 @@ public class Inspect implements CharacterCommand {
 
     @Override
     public String getDescription() {
-        return "Use an object";
+        return "Prints out the description of an object (args: item name)";
     }
 }

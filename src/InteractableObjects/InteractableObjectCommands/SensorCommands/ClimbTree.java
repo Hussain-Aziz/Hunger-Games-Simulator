@@ -1,9 +1,8 @@
 package InteractableObjects.InteractableObjectCommands.SensorCommands;
 
 import Characters.Character;
-import Sensors.SensorBehaviours.Climbing;
-import Sensors.SensorManager;
-import Singletons.UI;
+import Singletons.SensorBehaviours.*;
+import Singletons.*;
 
 public class ClimbTree extends SensorCommand {
     @Override

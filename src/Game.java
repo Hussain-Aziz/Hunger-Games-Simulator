@@ -1,10 +1,8 @@
-import Characters.Katniss;
+import Characters.*;
 import Characters.Character;
-import Enums.Direction;
-import Sensors.SensorManager;
-import Singletons.SceneManager;
-import Singletons.UI;
-import MessageArchitecture.Narrator;
+import Scenes.*;
+import Singletons.*;
+import MessageArchitecture.*;
 
 /**
  * Class that acts as the entry point of the game
@@ -28,6 +26,14 @@ public class Game {
         startingScene.characterEntry(mainCharacter, Direction.north);
 
         // create narrator and add characters as subjects
-        Narrator narrator = new Narrator(SceneManager.getInstance().getAllCharacters());
+        var characters = SceneManager.getInstance().getAllCharacters();
+        Narrator narrator = new Narrator(characters);
+
+        // register NPC as observer manually because Katniss is always created after the NPCs
+        for (Character character : characters) {
+            if (character instanceof NPC) {
+                mainCharacter.registerObserver((NPC)character);
+            }
+        }
     }
 }

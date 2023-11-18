@@ -1,6 +1,7 @@
 package Singletons;
 
 import java.util.Scanner;
+import java.util.concurrent.Semaphore;
 
 /**
  * Singleton class for managing the UI
@@ -16,6 +17,11 @@ public class UI {
      * The scanner used for reading from the console
      */
     private final Scanner scanner;
+
+    /**
+     * The semaphore used to lock print commands between overloads of print command
+     */
+    private final Semaphore printingSemaphore = new Semaphore(1);
 
     /**
      * Private constructor of the UI class
@@ -37,18 +43,45 @@ public class UI {
      * Prints a message to the console seperated by spaces
      */
     public synchronized void print(Object... args) {
-        StringBuilder output = new StringBuilder();
-        for (Object arg : args) {
-            output.append(arg.toString()).append(" ");
+        try {
+            StringBuilder output = new StringBuilder();
+            for (Object arg : args) {
+                output.append(arg.toString()).append(" ");
+            }
+
+            printingSemaphore.acquire();
+            printInternal(output.toString(), true, false);
+            printingSemaphore.release();
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
-        print(output.toString(), true);
     }
 
-    private void print(String message, boolean newLine) {
-        if (newLine){
-            System.out.println(message);
+    public synchronized void printError(Object... args) {
+        try {
+            StringBuilder output = new StringBuilder();
+            for (Object arg : args) {
+                output.append(arg.toString()).append(" ");
+            }
+            printingSemaphore.acquire();
+            printInternal(output.toString(), true, true);
+            printingSemaphore.release();
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void printInternal(String message, boolean newLine, boolean error) {
+        if (error) {
+            System.err.println(message);
         } else {
-            System.out.print(message);
+            if (newLine) {
+                System.out.println(message);
+            } else {
+                System.out.print(message);
+            }
         }
     }
 
@@ -56,7 +89,15 @@ public class UI {
      * Reads a line from the console
      */
     public synchronized String read() {
-        print(">>", false);
-        return scanner.nextLine();
+        try {
+
+            printingSemaphore.acquire();
+            printInternal(">>", false, false);
+            printingSemaphore.release();
+
+            return scanner.nextLine();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -25,15 +25,15 @@ public class Position {
      * Returns true if the current position and the given position are within a range
      * Example: if current position is (0, 0) and the given position is (1, 1) and the range is 1, then the function returns true
      */
-    public boolean isInContact(Position position, int range) {
-        return Math.abs(position.x - x) <= range && Math.abs(position.y - y) <= range;
+    public boolean isInContact(Position position) {
+        return Math.abs(position.x - x) == 0 && Math.abs(position.y - y) == 0;
     }
     /**
      * Returns true if the current position and the given position are equal to a range
-     * Example: if current position is (0, 0) and the given position is (2, 2) and the range is 2, then the function returns true
-     * Example: if current position is (0, 0) and the given position is (1, 1) and the range is 2, then the function returns false
+     * Example: if current position is (0, 0) and the given position is (1, 0) and the range is 1, then the function returns true
+     * Example: if current position is (0, 0) and the given position is (0, 0) and the range is 2, then the function returns false
      */
-    public boolean IsInExactContact(Position position, int range) {
+    public boolean IsInRangeContact(Position position, int range) {
         return Math.abs(position.x - x) == range && Math.abs(position.y - y) == range;
     }
 

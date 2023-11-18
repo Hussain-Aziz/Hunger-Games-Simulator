@@ -15,31 +15,12 @@ public class NutMountain extends Scene {
                 "You are in the Nut Mountain Area. There are Mountains everywhere.",
                 4,
                 new HashMap<InteractableObject, Position>() {{
-                	
+
                     //put(new Dagger(), new Position(0, 0));
-                	// TODO add other interactable objects like what ?
+                    // TODO add other interactable objects like what ?
                 }},
                 new HashMap<Character, Position>() {{
                 }});
-    
-    }
-//    public Mountain getEnv() {
-//    	
-//    	for (InteractableObject currentObject: interactableObjects.keySet())
-//    	{
-//    		if (currentObject instanceof Mountain)
-//    		{
-//    			return (Mountain)currentObject;
-//    		}
-//    	}
-//    	
-//    	return null;
-//    	
-//    }
 
-	@Override
-	public Tree getEnv() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    }
 }

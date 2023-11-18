@@ -31,6 +31,6 @@ public class Drop implements CharacterCommand {
 
     @Override
     public String getDescription() {
-        return "Use an object";
+        return "Drop an object from your inventory (args: item name)";
     }
 }

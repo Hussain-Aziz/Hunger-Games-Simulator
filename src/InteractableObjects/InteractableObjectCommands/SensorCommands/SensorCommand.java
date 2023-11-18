@@ -2,7 +2,7 @@ package InteractableObjects.InteractableObjectCommands.SensorCommands;
 
 import Characters.Character;
 import InteractableObjects.InteractableObjectCommands.InteractableObjectCommand;
-import Sensors.SensorManager;
+import Singletons.*;
 
 /*
  * Template class for those commands that use sensors
@@ -22,7 +22,7 @@ public abstract class SensorCommand implements InteractableObjectCommand {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                UI.getInstance().print(e);
             }
         }
 
