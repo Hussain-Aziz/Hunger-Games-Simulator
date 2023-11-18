@@ -1,7 +1,6 @@
 package Singletons;
 
-import Singletons.*;
-import Singletons.SensorBehaviours.*;
+import Singletons.SensorBehaviours.SensorBehaviour;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -16,11 +15,10 @@ public class SensorManager implements Runnable
 {
 	private final String host = "192.168.1.14";
 	private final int port = 26950;
-	private final JSONParser parser = new JSONParser();
-	private static SensorManager instance = null;
 	private SensorBehaviour sensorBehaviour;
-
+	private final JSONParser parser = new JSONParser();
 	private boolean isRunning = false;
+	private static SensorManager instance = null;
 
 	private SensorManager()
 	{

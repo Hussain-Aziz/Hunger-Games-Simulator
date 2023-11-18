@@ -24,9 +24,9 @@ public class SceneManager {
     /**
      * A graph of scenes (stored as adjacency lists) used for movement between them
      */
-    private HashMap<Scene, HashMap<Direction, Scene>> adjacentScenes;
+    private final HashMap<Scene, HashMap<Direction, Scene>> adjacentScenes;
 
-    private Scene startScene;
+    private final Scene startScene;
 
     /**
      * Private constructor of the SceneManager class

@@ -26,7 +26,7 @@ public class Interact implements CharacterCommand {
 
             for (int i = 1; i < args.length && i < npcName.length + 1; i++) {
                 if (!args[i].toLowerCase().equals(npcName[i - 1])) {
-                    equals = false;;
+                    equals = false;
                 }
             }
 

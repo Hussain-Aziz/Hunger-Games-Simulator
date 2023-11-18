@@ -3,7 +3,7 @@ package InteractableObjects.Consumables.ConsumableBehaviours;
 import Characters.Character;
 
 public class Heal implements ConsumableBehavior{
-    private int healAmount;
+    private final int healAmount;
 
     public Heal(int healAmount) {
         this.healAmount = healAmount;

@@ -9,10 +9,10 @@ public interface InteractableObjectOwner {
     /**
      * Adds an object to an owner
      */
-    public boolean take(InteractableObject object, Position position);
+    boolean take(InteractableObject object, Position position);
 
     /**
      * Removes an object from an owner
      */
-    public void drop(InteractableObject object);
+    void drop(InteractableObject object);
 }

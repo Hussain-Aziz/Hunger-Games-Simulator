@@ -3,6 +3,6 @@ package Characters.CharacterStates;
 import Characters.NPC;
 
 public interface CharacterState {
-    public void prev(NPC npc);
-    public void next(NPC npc);
+    void prev(NPC npc);
+    void next(NPC npc);
 }

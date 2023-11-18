@@ -4,13 +4,8 @@ import Scenes.*;
 import Singletons.*;
 import MessageArchitecture.*;
 
-/**
- * Class that acts as the entry point of the game
- */
 public class Game {
-    /**
-     * Entry point of the game
-     */
+
     public static void main(String[] args) {
         // initialize singletons
         UI.getInstance();

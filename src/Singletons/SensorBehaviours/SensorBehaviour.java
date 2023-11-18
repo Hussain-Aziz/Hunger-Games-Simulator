@@ -4,9 +4,9 @@ import org.json.simple.JSONObject;
 
 public interface SensorBehaviour {
 
-    public void printPrompt();
+    void printPrompt();
 
-    public double[] parseJson(JSONObject jsonObject);
+    double[] parseJson(JSONObject jsonObject);
 
-    public boolean isBehaviourFound(double[] values);
+    boolean isBehaviourFound(double[] values);
 }

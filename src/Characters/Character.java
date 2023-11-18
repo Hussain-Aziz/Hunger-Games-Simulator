@@ -32,7 +32,7 @@ public abstract class Character implements InteractableObjectOwner, Subject {
     /**
      * Observer array used for ConcreteSubject implementation
      */
-    private ArrayList<Observer> observers;
+    private final ArrayList<Observer> observers;
     
     /**
      * Constructor of the Character class
@@ -104,7 +104,7 @@ public abstract class Character implements InteractableObjectOwner, Subject {
 	
 	public void publishMessage(Message m) {
 		for (int i = 0; i < observers.size(); i++) {
-			Observer observer = (Observer) observers.get(i);
+			Observer observer = observers.get(i);
             observer.update(m);
 		}
 	}
