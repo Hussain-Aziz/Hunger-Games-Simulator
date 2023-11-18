@@ -22,8 +22,10 @@ public class Take implements CharacterCommand {
             for (var object : nearbyObjects) {
                 if (object.getName().toLowerCase().equals(args[1])) {
                     object.interact(katniss, "take");
+                    return;
                 }
             }
+            UI.getInstance().print("I cant take that");
         }
     }
 

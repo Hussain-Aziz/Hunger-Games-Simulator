@@ -26,6 +26,7 @@ public class Position {
      * Example: if current position is (0, 0) and the given position is (1, 1) and the range is 1, then the function returns true
      */
     public boolean isInContact(Position position) {
+        if (position == null) return false;
         return Math.abs(position.x - x) == 0 && Math.abs(position.y - y) == 0;
     }
     /**

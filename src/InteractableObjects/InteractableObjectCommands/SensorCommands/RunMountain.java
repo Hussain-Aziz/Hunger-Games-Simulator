@@ -6,8 +6,8 @@ import Singletons.*;
 
 public class RunMountain extends SensorCommand {
     @Override
-    public void setSensorBehaviour(SensorManager sensorManager) {
-        sensorManager.setSensorBehaviour(new Running());
+    public boolean setSensorBehaviour(SensorManager sensorManager) {
+        return sensorManager.setSensorBehaviour(new Running());
     }
 
     @Override

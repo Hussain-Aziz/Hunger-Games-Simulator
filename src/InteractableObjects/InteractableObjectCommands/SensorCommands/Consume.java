@@ -13,8 +13,8 @@ public class Consume extends SensorCommand {
     }
 
     @Override
-    public void setSensorBehaviour(SensorManager sensorManager) {
-        sensorManager.setSensorBehaviour(new Healing());
+    public boolean setSensorBehaviour(SensorManager sensorManager) {
+        return sensorManager.setSensorBehaviour(new Healing());
     }
 
     @Override

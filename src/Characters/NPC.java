@@ -96,7 +96,9 @@ public abstract class NPC extends Character implements Observer {
     }
 
     public void setState(CharacterState state) {
-        this.state = state;
+        if (health > 0) {
+            this.state = state;
+        }
     }
 
     public ArrayList<InteractableObject> getInventory() {

@@ -11,8 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class SensorManager implements Runnable
-{
+public class SensorManager implements Runnable {
 	private final String host = "192.168.1.14";
 	private final int port = 26950;
 	private SensorBehaviour sensorBehaviour;
@@ -33,12 +32,13 @@ public class SensorManager implements Runnable
 		return instance;
 	}
 
-	public void setSensorBehaviour(SensorBehaviour sensorBehaviour) {
-		if (isRunning) {
+	public boolean setSensorBehaviour(SensorBehaviour sensorBehaviour) {
+		if (!isRunning) {
 			warnServerNotRunning();
-			return;
+			return false;
 		}
 		this.sensorBehaviour = sensorBehaviour;
+		return true;
 	}
 
 	public void run() {

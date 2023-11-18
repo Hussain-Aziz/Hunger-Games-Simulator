@@ -13,8 +13,8 @@ public class Attack extends SensorCommand {
     }
 
     @Override
-    public void setSensorBehaviour(SensorManager sensorManager) {
-        sensorManager.setSensorBehaviour(new Swinging());
+    public boolean setSensorBehaviour(SensorManager sensorManager) {
+        return sensorManager.setSensorBehaviour(new Swinging());
     }
 
     @Override

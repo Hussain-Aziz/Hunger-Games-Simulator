@@ -6,8 +6,8 @@ import Singletons.*;
 
 public class ClimbTree extends SensorCommand {
     @Override
-    public void setSensorBehaviour(SensorManager sensorManager) {
-        sensorManager.setSensorBehaviour(new Climbing());
+    public boolean setSensorBehaviour(SensorManager sensorManager) {
+        return sensorManager.setSensorBehaviour(new Climbing());
     }
 
     @Override

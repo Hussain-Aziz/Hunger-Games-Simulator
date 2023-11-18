@@ -93,9 +93,10 @@ public class UI {
 
             printingSemaphore.acquire();
             printInternal(">>", false, false);
+            String input = scanner.nextLine();
             printingSemaphore.release();
 
-            return scanner.nextLine();
+            return input;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

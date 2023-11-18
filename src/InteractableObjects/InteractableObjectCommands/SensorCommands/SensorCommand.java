@@ -12,17 +12,18 @@ public abstract class SensorCommand implements InteractableObjectCommand {
     public final void execute(Character sender) {
         var sensorManager = SensorManager.getInstance();
 
-        setSensorBehaviour(sensorManager);
+        // still let the app run if sensor not connected
+        if (setSensorBehaviour(sensorManager)) {
+            if (printPrompt()) {
+                sensorManager.getSensorBehaviour().printPrompt();
+            }
 
-        if (printPrompt()) {
-            sensorManager.getSensorBehaviour().printPrompt();
-        }
-
-        while (sensorManager.isStillRunning()) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                UI.getInstance().print(e);
+            while (sensorManager.isStillRunning()) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    UI.getInstance().print(e);
+                }
             }
         }
 
@@ -32,7 +33,7 @@ public abstract class SensorCommand implements InteractableObjectCommand {
     /*
      * A function called by execute() to set the sensor behaviour
      */
-    public abstract void setSensorBehaviour(SensorManager sensorManager);
+    public abstract boolean setSensorBehaviour(SensorManager sensorManager);
 
     /*
      * A function called by execute() to that is called on successful completion of the sensor
