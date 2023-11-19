@@ -86,7 +86,11 @@ public abstract class Consumable extends InteractableObject implements Runnable 
         state.next(this);
     }
 
-    public void setState(ConsumableState state) {
+    public synchronized void setState(ConsumableState state) {
         this.state = state;
+    }
+
+    public ConsumableState getState() {
+        return state;
     }
 }

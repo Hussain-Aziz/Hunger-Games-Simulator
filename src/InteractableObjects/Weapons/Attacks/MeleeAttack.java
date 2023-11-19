@@ -39,5 +39,8 @@ public class MeleeAttack implements AttackBehaviour {
             }
         }
     }
-
+    @Override
+    public String toString() {
+        return "Melee";
+    }
 }

@@ -40,5 +40,8 @@ public class RangeAttack implements AttackBehaviour {
             }
         }
     }
-
+    @Override
+    public String toString() {
+        return "Ranged";
+    }
 }

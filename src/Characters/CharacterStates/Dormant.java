@@ -7,9 +7,12 @@ public class Dormant implements CharacterState {
     public void prev(NPC npc) {
         npc.setState(new Talk(npc));
     }
-
     @Override
     public void next(NPC npc) {
         npc.setState(new Talk(npc));
+    }
+    @Override
+    public String toString() {
+        return "Dormant";
     }
 }

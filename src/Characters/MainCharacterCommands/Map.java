@@ -1,14 +1,17 @@
 package Characters.MainCharacterCommands;
 
 import Characters.Katniss;
+import Characters.NPC;
+import InteractableObjects.Consumables.Consumable;
+import InteractableObjects.Weapons.Weapon;
 import Scenes.Direction;
 import Singletons.SceneManager;
 import Singletons.UI;
 
-public class Position implements CharacterCommand {
+public class Map implements CharacterCommand {
     private final Katniss katniss;
 
-    public Position(Katniss katniss) {
+    public Map(Katniss katniss) {
         this.katniss = katniss;
     }
     @Override
@@ -19,14 +22,20 @@ public class Position implements CharacterCommand {
             output.append("Characters:\n");
             for (var character : katniss.getCurrentScene().getCharacters().keySet()) {
                 if (character != katniss) {
-                    output.append("\t" + character.getName() + " is at " + katniss.getCurrentScene().getCharacters().get(character) + "\n");
+                    output.append("\t" + character.getName() + " (" + ((NPC) character).getState() + ")" + " is at " + katniss.getCurrentScene().getCharacters().get(character) + "\n");
                 }
             }
         }
         if (!katniss.getCurrentScene().getInteractableObjects().keySet().isEmpty()) {
             output.append("Objects:\n");
             for (var object : katniss.getCurrentScene().getInteractableObjects().keySet()) {
-                output.append("\t" + object.getName() + " is at " + katniss.getCurrentScene().getInteractableObjects().get(object) + "\n");
+                String extraInfo = "";
+                if (object instanceof Consumable) {
+                    extraInfo = ((Consumable) object).getState().toString();
+                } else if (object instanceof Weapon) {
+                    extraInfo = ((Weapon) object).getAttackBehaviour().toString();
+                }
+                output.append("\t" + object.getName() + " (" + extraInfo + ")" + " is at " + katniss.getCurrentScene().getInteractableObjects().get(object) + "\n");
             }
         }
 
@@ -43,11 +52,11 @@ public class Position implements CharacterCommand {
 
     @Override
     public String[] getAliases() {
-        return new String[]{"position", "pos", "map"};
+        return new String[]{"map", "position", "pos"};
     }
 
     @Override
     public String getDescription() {
-        return "Prints your position in the current scene";
+        return "Prints detailed information about the current scene and adjacent scenes.";
     }
 }

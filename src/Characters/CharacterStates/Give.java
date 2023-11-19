@@ -20,4 +20,9 @@ public class Give implements CharacterState {
     public void next(NPC npc) {
         npc.setState(new Attack(npc));
     }
+
+    @Override
+    public String toString() {
+        return "Giving";
+    }
 }

@@ -15,4 +15,9 @@ public class Talk implements CharacterState {
     public void next(NPC npc) {
         npc.setState(new Give(npc));
     }
+
+    @Override
+    public String toString() {
+        return "Talking";
+    }
 }

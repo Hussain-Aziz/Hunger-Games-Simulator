@@ -16,4 +16,9 @@ public class Rotten implements ConsumableState{
         UI.getInstance().print("You take a bite of the rotten food and feel sick");
         return new Damage();
     }
+
+    @Override
+    public String toString() {
+        return "Rotten";
+    }
 }

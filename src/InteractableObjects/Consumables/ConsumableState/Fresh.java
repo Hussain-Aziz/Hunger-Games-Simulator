@@ -14,4 +14,8 @@ public class Fresh implements ConsumableState{
     public ConsumableBehavior getEffect() {
         return new Heal(2);
     }
+    @Override
+    public String toString() {
+        return "Fresh";
+    }
 }

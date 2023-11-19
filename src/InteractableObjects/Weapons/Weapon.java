@@ -58,4 +58,8 @@ public abstract class Weapon extends InteractableObject {
     public void attack(Character sender) {
         attackBehaviour.attack(sender);
     }
+
+    public AttackBehaviour getAttackBehaviour() {
+        return attackBehaviour;
+    }
 }

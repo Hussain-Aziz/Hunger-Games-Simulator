@@ -108,12 +108,16 @@ public abstract class NPC extends Character implements Observer, Runnable {
         state.prev(this);
     }
 
-    public void setState(CharacterState state) {
+    public synchronized void setState(CharacterState state) {
         if (health > 0) {
             this.state = state;
         }
     }
     public ArrayList<InteractableObject> getInventory() {
         return inventory;
+    }
+
+    public String getState() {
+        return state.toString();
     }
 }

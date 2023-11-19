@@ -16,4 +16,9 @@ public class Stale implements ConsumableState{
         UI.getInstance().print("You take a bite of the stale food and feel nothing");
         return new Heal(0);
     }
+
+    @Override
+    public String toString() {
+        return "Stale";
+    }
 }

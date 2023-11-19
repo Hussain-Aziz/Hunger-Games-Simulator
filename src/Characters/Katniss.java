@@ -36,7 +36,7 @@ public class Katniss extends Character implements MainCharacter, Runnable {
         commands.add(new LookAround(this));
         commands.add(new Use(this));
         commands.add(new Interact(this));
-        commands.add(new Characters.MainCharacterCommands.Position(this));
+        commands.add(new Map(this));
         commands.add(new Drop(this));
         commands.add(new Inspect(this));
         commands.add(new Quit(this));

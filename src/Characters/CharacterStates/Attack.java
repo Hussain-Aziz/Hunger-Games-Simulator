@@ -25,4 +25,9 @@ public class Attack implements CharacterState {
     public void next(NPC npc) {
         npc.setState(new Attack(npc));
     }
+
+    @Override
+    public String toString() {
+        return "Attacking";
+    }
 }
