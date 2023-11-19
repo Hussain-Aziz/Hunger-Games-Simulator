@@ -12,16 +12,20 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class SensorManager implements Runnable {
-	private final String host = "192.168.1.14";
-	private final int port = 26950;
+	private final Thread thread;
+	private String host = "192.168.1.14";
+	private int port = 26950;
 	private SensorBehaviour sensorBehaviour;
 	private final JSONParser parser = new JSONParser();
 	private boolean isRunning = false;
 	private static SensorManager instance = null;
 
-	private SensorManager()
-	{
-		new Thread(this).start();
+	private SensorManager() {
+		this.thread = new Thread(this);
+	}
+
+	public void start() {
+		this.thread.start();
 	}
 
 	public static SensorManager getInstance()
@@ -30,6 +34,11 @@ public class SensorManager implements Runnable {
 			instance = new SensorManager();
 		}
 		return instance;
+	}
+
+	public void setHost(String host, int port) {
+		this.host = host;
+		this.port = port;
 	}
 
 	public boolean setSensorBehaviour(SensorBehaviour sensorBehaviour) {

@@ -162,6 +162,7 @@ public abstract class Scene implements InteractableObjectOwner {
 
     public void killCharacter(Character character) {
         characters.remove(character);
+        SceneManager.getInstance().addScore();
     }
 
     /**

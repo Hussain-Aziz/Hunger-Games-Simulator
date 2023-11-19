@@ -13,7 +13,8 @@ public abstract class SensorCommand implements InteractableObjectCommand {
         var sensorManager = SensorManager.getInstance();
 
         // still let the app run if sensor not connected
-        if (setSensorBehaviour(sensorManager)) {
+        var sensorConnected = setSensorBehaviour(sensorManager);
+        if (sensorConnected) {
             if (printPrompt()) {
                 sensorManager.getSensorBehaviour().printPrompt();
             }

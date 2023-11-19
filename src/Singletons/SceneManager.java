@@ -27,6 +27,7 @@ public class SceneManager {
     private final HashMap<Scene, HashMap<Direction, Scene>> adjacentScenes;
 
     private final Scene startScene;
+    private int score;
 
     /**
      * Private constructor of the SceneManager class
@@ -83,5 +84,25 @@ public class SceneManager {
     		allCharacters.addAll(scene.getCharacters().keySet());
     	}
         return allCharacters;
+    }
+
+    public void addScore() {
+        this.score += 1;
+
+        if (score >= 4) {
+            UI.getInstance().print("             ___________");
+            UI.getInstance().print("            '._==_==_=_.'");
+            UI.getInstance().print("            .-\\:      /-.");
+            UI.getInstance().print("           | (|:.     |) |");
+            UI.getInstance().print("            '-|:.     |-'");
+            UI.getInstance().print("              \\::.    /");
+            UI.getInstance().print("               '::. .'");
+            UI.getInstance().print("                 ) (");
+            UI.getInstance().print("               _.' '._");
+            UI.getInstance().print("              `\"\"\"\"\"\"\"`");
+            UI.getInstance().print("You have bested all your foes and survived the hunger games!");
+            UI.getInstance().print("You have finished this game and you may now close this window");
+            System.exit(0);
+        }
     }
 }
