@@ -69,15 +69,14 @@ public abstract class NPC extends Character implements Observer, Runnable {
 
     public void update(Message message) {
         // if a main character does something to npc
-        if (message.origin instanceof MainCharacter) {
+        if (message.origin instanceof MainCharacter && ((Katniss) message.origin).getCurrentScene() == getCurrentScene()) {
             switch (message.topic) {
                 case "meet" -> {
                     changeState();
                 }
                 case "attack" -> {
-                    // if the npc is in the same scene as the main character, and they attacked
-                    // the npc, then the npc will attack back with a 30% chance
-                    if (((Katniss) message.origin).getCurrentScene() == getCurrentScene() && random.nextInt(10) < 3) {
+                    // if they attacked the npc, then the npc will attack back with a 30% chance
+                    if (random.nextInt(10) < 3) {
                         setState(new Attack(this));
                     }
                 }

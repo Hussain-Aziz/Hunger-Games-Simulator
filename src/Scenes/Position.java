@@ -35,6 +35,7 @@ public class Position {
      * Example: if current position is (0, 0) and the given position is (0, 0) and the range is 2, then the function returns false
      */
     public boolean IsInRangeContact(Position position, int range) {
+        if (position == null) return false;
         return Math.abs(position.x - x) == range && Math.abs(position.y - y) == range;
     }
 

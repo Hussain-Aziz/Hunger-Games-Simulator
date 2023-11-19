@@ -22,6 +22,6 @@ public class Rue extends NPC {
 
     @Override
     public void talk() {
-        UI.getInstance().print("Hello, I'm Peeta Mellark. Stay away from me");
+        UI.getInstance().print("Hello, I'm Rue Barnette. I'm will not help you on your journey.");
     }
 }

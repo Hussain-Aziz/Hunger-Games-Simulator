@@ -10,6 +10,7 @@ import InteractableObjects.Weapons.Dagger;
 import InteractableObjects.Enviornment.Mountain;
 import InteractableObjects.Enviornment.Tree;
 import InteractableObjects.InteractableObject;
+import InteractableObjects.Weapons.Slingshot;
 import InteractableObjects.Weapons.Sword;
 
 import java.util.HashMap;
@@ -19,11 +20,11 @@ public class NutMountain extends Scene {
         super(
                 "Nut Mountain",
                 "You are in the Nut Mountain Area. There are Mountains everywhere.",
-                4,
+                2,
                 new HashMap<InteractableObject, Position>() {{
                     put(new Mountain(), new Position(1, 0));
                     put(new Mountain(), new Position(0, 1));
-                    put(new BowAndArrow(), new Position(0, 0));
+                    put(new Slingshot(), new Position(0, 0));
                     put(new Water(), new Position(0, 0));
                 }},
                 new HashMap<Character, Position>() {{

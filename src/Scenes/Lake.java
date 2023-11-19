@@ -16,7 +16,7 @@ public class Lake extends Scene {
         super(
                 "Lake",
                 "You are in the Lake. There are fish everywhere.",
-                4,
+                2,
                 new HashMap<InteractableObject, Position>() {{
                     put(new Pond(), new Position(1, 0));
                     put(new Pond(), new Position(0, 1));

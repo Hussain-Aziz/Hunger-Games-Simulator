@@ -19,7 +19,7 @@ public class Forest extends Scene {
         super(
                 "Forest",
                 "You are in the forest. There are trees everywhere.",
-                4,
+                2,
                 new HashMap<InteractableObject, Position>() {{
                     put(new Tree(), new Position(1, 0));
                     put(new Tree(), new Position(0, 1));

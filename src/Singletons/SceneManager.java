@@ -1,10 +1,7 @@
 package Singletons;
 
 import Characters.Character;
-import Scenes.Direction;
-import Scenes.Cornucopia;
-import Scenes.Forest;
-import Scenes.Scene;
+import Scenes.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,14 +35,26 @@ public class SceneManager {
 
         var cornucopia = new Cornucopia();
         var forest = new Forest();
+        var lake = new Lake();
+        var nutMountain = new NutMountain();
 
         startScene = cornucopia;
 
         adjacentScenes.put(cornucopia, new HashMap<Direction, Scene>() {{
             put(Direction.north, forest);
+            put(Direction.south, nutMountain);
+            put(Direction.east, lake);
         }});
         adjacentScenes.put(forest, new HashMap<Direction, Scene>() {{
             put(Direction.south, cornucopia);
+        }});
+
+        adjacentScenes.put(lake, new HashMap<Direction, Scene>() {{
+            put(Direction.west, cornucopia);
+        }});
+
+        adjacentScenes.put(nutMountain, new HashMap<Direction, Scene>() {{
+            put(Direction.north, cornucopia);
         }});
     }
 
