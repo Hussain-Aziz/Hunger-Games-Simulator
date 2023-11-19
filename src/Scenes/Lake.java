@@ -2,7 +2,7 @@ package Scenes;
 
 import Characters.Cato;
 import Characters.Character;
-import Characters.Effie;
+import Characters.Marvel;
 import InteractableObjects.Consumables.Fish;
 import InteractableObjects.Consumables.Water;
 import InteractableObjects.Weapons.BowAndArrow;
@@ -25,7 +25,7 @@ public class Lake extends Scene {
                     put(new Fish(), new Position(0, 0));
                 }},
                 new HashMap<Character, Position>() {{
-                    put(new Effie(), new Position(1, 1));
+                    put(new Marvel(), new Position(1, 1));
                 }});
     }
 }
