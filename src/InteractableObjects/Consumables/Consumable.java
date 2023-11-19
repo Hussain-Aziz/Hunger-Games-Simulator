@@ -46,7 +46,7 @@ public abstract class Consumable extends InteractableObject implements Runnable 
     public void run() {
         while (true) {
             try {
-                Thread.sleep(1);//60 * 1000);
+                Thread.sleep(60 * 1000);
                 if (random.nextInt(10) < 3) {
                     nextState();
                 }
