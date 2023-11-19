@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Katniss extends Character implements MainCharacter, Runnable {
-
     private final Thread thread;
     private final ArrayList<CharacterCommand> commands;
     private final HashMap<String, Integer> commandMap;

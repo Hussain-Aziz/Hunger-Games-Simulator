@@ -16,10 +16,6 @@ import java.util.Random;
  * Template class for NPCs in the game
  */
 public abstract class NPC extends Character implements Observer, Runnable {
-    public NPC(String name, int health) {
-        super(name, health);
-        new Thread(this).start();
-    }
 
     private CharacterState state = new Dormant();
 
@@ -39,6 +35,8 @@ public abstract class NPC extends Character implements Observer, Runnable {
         for (InteractableObject object : inventory) {
             object.setOwner(this);
         }
+
+        new Thread(this).start();
     }
 
     /**

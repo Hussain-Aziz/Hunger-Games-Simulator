@@ -46,7 +46,9 @@ public class SensorManager implements Runnable {
 			warnServerNotRunning();
 			return false;
 		}
-		this.sensorBehaviour = sensorBehaviour;
+		synchronized (this.sensorBehaviour) {
+			this.sensorBehaviour = sensorBehaviour;
+		}
 		return true;
 	}
 
@@ -63,11 +65,12 @@ public class SensorManager implements Runnable {
 
 			while ((line = br.readLine()) != null) {
 				JSONObject jsonObject = (JSONObject) parser.parse(line);
-
-				if (sensorBehaviour != null) {
-					var values = sensorBehaviour.parseJson(jsonObject);
-					if (sensorBehaviour.isBehaviourFound(values)) {
-						sensorBehaviour = null;
+				synchronized (this.sensorBehaviour) {
+					if (sensorBehaviour != null) {
+						var values = sensorBehaviour.parseJson(jsonObject);
+						if (sensorBehaviour.isBehaviourFound(values)) {
+							sensorBehaviour = null;
+						}
 					}
 				}
 			}

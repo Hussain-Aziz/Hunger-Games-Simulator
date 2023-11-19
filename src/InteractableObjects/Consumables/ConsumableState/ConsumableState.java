@@ -6,6 +6,5 @@ import InteractableObjects.Consumables.ConsumableBehaviours.ConsumableBehavior;
 
 public interface ConsumableState {
     void next(Consumable object);
-
     ConsumableBehavior getEffect();
 }
