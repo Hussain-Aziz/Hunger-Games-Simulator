@@ -1,7 +1,6 @@
 package Scenes;
 
 import Characters.Character;
-import Characters.Effie;
 import Characters.Peeta;
 import Characters.Rue;
 import InteractableObjects.Consumables.Berry;
