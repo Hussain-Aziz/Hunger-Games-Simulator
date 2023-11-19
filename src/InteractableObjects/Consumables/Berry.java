@@ -5,10 +5,10 @@ import Singletons.UI;
 
 public class Berry extends Consumable {
     public Berry() {
-        super("berry", "A berry. It looks poisonous", new Damage());
+        super("berry", "A berry. It looks poisonous");
     }
     protected void throwWrapping() {
-        UI.getInstance().print("You spit out the berry");
+        UI.getInstance().print("You spit out the berry skin");
     }
 
     protected void consumeObject(){

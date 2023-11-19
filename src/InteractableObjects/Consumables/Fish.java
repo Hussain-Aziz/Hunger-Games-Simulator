@@ -5,7 +5,7 @@ import Singletons.UI;
 
 public class Fish extends Consumable {
     public Fish() {
-        super("Fish", "A fish. It looks delicious", new Heal(1));
+        super("Fish", "A fish. It looks delicious");
     }
 
     protected void throwWrapping() {

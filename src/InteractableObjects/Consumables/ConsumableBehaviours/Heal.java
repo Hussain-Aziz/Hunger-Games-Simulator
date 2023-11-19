@@ -10,7 +10,7 @@ public class Heal implements ConsumableBehavior{
     }
 
     @Override
-    public void consume(Character sender) {
+    public void affect(Character sender) {
         sender.heal(healAmount);
     }
 }

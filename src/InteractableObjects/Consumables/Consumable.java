@@ -2,6 +2,8 @@ package InteractableObjects.Consumables;
 
 import Characters.Character;
 import InteractableObjects.Consumables.ConsumableBehaviours.ConsumableBehavior;
+import InteractableObjects.Consumables.ConsumableState.ConsumableState;
+import InteractableObjects.Consumables.ConsumableState.Fresh;
 import InteractableObjects.InteractableObject;
 import InteractableObjects.InteractableObjectCommands.*;
 import InteractableObjects.InteractableObjectCommands.SensorCommands.Consume;
@@ -10,19 +12,20 @@ import Singletons.UI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * A template class to be used for weapons
  */
-public abstract class Consumable extends InteractableObject {
-
+public abstract class Consumable extends InteractableObject implements Runnable {
     private final ArrayList<InteractableObjectCommand> commands;
     private final HashMap<String, Integer> commandMap;
-    private final ConsumableBehavior consumableBehavior;
-    public Consumable(String name, String description, ConsumableBehavior consumableBehavior)
+    private ConsumableState state = new Fresh();
+    private Random random = new Random();
+
+    public Consumable(String name, String description)
     {
         super(name, description);
-        this.consumableBehavior = consumableBehavior;
 
         commands = new ArrayList<>();
         commands.add(new Take(this));
@@ -34,6 +37,22 @@ public abstract class Consumable extends InteractableObject {
         commandMap = new HashMap<>();
         for(InteractableObjectCommand command : commands) {
             commandMap.put(command.getName(), commands.indexOf(command));
+        }
+
+        new Thread(this).start();
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Thread.sleep(1);//60 * 1000);
+                if (random.nextInt(10) < 3) {
+                    nextState();
+                }
+            } catch (InterruptedException e) {
+                UI.getInstance().printError(e);
+            }
         }
     }
 
@@ -54,7 +73,7 @@ public abstract class Consumable extends InteractableObject {
         openWrapping();
         consumeObject();
         throwWrapping();
-        realizeEffects(sender);
+        state.getEffect().affect(sender);
     }
 
     protected abstract void throwWrapping();
@@ -63,7 +82,11 @@ public abstract class Consumable extends InteractableObject {
 
     protected abstract void openWrapping();
 
-    public void realizeEffects(Character sender) {
-        consumableBehavior.consume(sender);
+    public void nextState() {
+        state.next(this);
+    }
+
+    public void setState(ConsumableState state) {
+        this.state = state;
     }
 }

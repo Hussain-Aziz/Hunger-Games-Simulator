@@ -5,7 +5,7 @@ import Singletons.UI;
 
 public class CarePack extends Consumable {
     public CarePack() {
-        super("carepack", "A care package. It heals you", new Heal(3));
+        super("carepack", "A care package. It heals you");
     }
 
     protected void throwWrapping() {

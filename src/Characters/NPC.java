@@ -7,6 +7,7 @@ import InteractableObjects.InteractableObject;
 import MessageArchitecture.Message;
 import MessageArchitecture.Observer;
 import Scenes.Position;
+import Singletons.UI;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,7 +15,11 @@ import java.util.Random;
 /**
  * Template class for NPCs in the game
  */
-public abstract class NPC extends Character implements Observer {
+public abstract class NPC extends Character implements Observer, Runnable {
+    public NPC(String name, int health) {
+        super(name, health);
+        new Thread(this).start();
+    }
 
     private CharacterState state = new Dormant();
 
@@ -51,6 +56,15 @@ public abstract class NPC extends Character implements Observer {
         String name = inventory.get(0).getName();
         inventory.get(0).interact(this, "drop");
         return name;
+    }
+
+    public void run() {
+        try {
+            Thread.sleep(30 * 1000);
+            changeState();
+        } catch (Exception e) {
+            UI.getInstance().printError(e);
+        }
     }
 
     public void update(Message message) {
@@ -100,7 +114,6 @@ public abstract class NPC extends Character implements Observer {
             this.state = state;
         }
     }
-
     public ArrayList<InteractableObject> getInventory() {
         return inventory;
     }

@@ -5,7 +5,7 @@ import Singletons.UI;
 
 public class Water extends Consumable {
     public Water() {
-        super("Water", "Water. helps heal and quench your player's thirst ", new Heal(1));
+        super("Water", "Water. helps heal and quench your player's thirst ");
     }
 
     protected void throwWrapping() {
