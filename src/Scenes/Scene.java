@@ -205,4 +205,7 @@ public abstract class Scene implements InteractableObjectOwner {
     public HashMap<Character, Position> getCharacters() {
         return characters;
     }
+    public HashMap<InteractableObject, Position> getInteractableObjects() {
+        return interactableObjects;
+    }
 }
