@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.concurrent.Semaphore;
 
 public class SensorManager implements Runnable {
 	private final Thread thread;
@@ -19,6 +20,8 @@ public class SensorManager implements Runnable {
 	private final JSONParser parser = new JSONParser();
 	private boolean isRunning = false;
 	private static SensorManager instance = null;
+
+	private Semaphore semaphore = new Semaphore(1);
 
 	private SensorManager() {
 		this.thread = new Thread(this);
@@ -41,12 +44,18 @@ public class SensorManager implements Runnable {
 		this.port = port;
 	}
 
-	public boolean setSensorBehaviour(SensorBehaviour sensorBehaviour) {
+	public synchronized boolean setSensorBehaviour(SensorBehaviour sensorBehaviour) {
 		if (!isRunning) {
 			warnServerNotRunning();
 			return false;
 		}
-		this.sensorBehaviour = sensorBehaviour;
+		try {
+			semaphore.acquire();
+			this.sensorBehaviour = sensorBehaviour;
+			semaphore.release();
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 
 		return true;
 	}
@@ -64,19 +73,21 @@ public class SensorManager implements Runnable {
 
 			while ((line = br.readLine()) != null) {
 				JSONObject jsonObject = (JSONObject) parser.parse(line);
+				semaphore.acquire();
 				if (sensorBehaviour != null) {
-					synchronized (this.sensorBehaviour) {
-						var values = sensorBehaviour.parseJson(jsonObject);
-						if (sensorBehaviour.isBehaviourFound(values)) {
-							sensorBehaviour = null;
-						}
+					var values = sensorBehaviour.parseJson(jsonObject);
+					if (sensorBehaviour.isBehaviourFound(values)) {
+						sensorBehaviour = null;
 					}
 				}
+				semaphore.release();
 			}
 		} catch (IOException ex) {
 			warnServerNotRunning();
 		} catch (ParseException e) {
             UI.getInstance().printError("Not able to parse JSON from server", e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         } finally {
 			isRunning = false;
 		}
