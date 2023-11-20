@@ -14,8 +14,8 @@ import java.util.concurrent.Semaphore;
 
 public class SensorManager implements Runnable {
 	private final Thread thread;
-	private String host = "192.168.1.14";
-	private int port = 26950;
+	private String host = "192.168.137.120";
+	private int port = 26951;
 	private SensorBehaviour sensorBehaviour;
 	private final JSONParser parser = new JSONParser();
 	private boolean isRunning = false;

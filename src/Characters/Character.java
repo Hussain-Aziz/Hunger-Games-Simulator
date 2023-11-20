@@ -77,7 +77,7 @@ public abstract class Character implements InteractableObjectOwner, Subject {
         	publishMessage(new Message(this, "health", "low health"));
         }
         else if (health == 0) {
-        	publishMessage(new Message(this, "death", name + " has dying"));
+        	publishMessage(new Message(this, "death", name + " dying"));
             currentScene.killCharacter(this);
         }
     }

@@ -102,6 +102,25 @@ public class Katniss extends Character implements MainCharacter, Runnable {
                 ui.print("Invalid command");
             }
         }
+        UI.getInstance().print("You have lost the game");
+        UI.getInstance().print("                      ,____");
+        UI.getInstance().print("                      |---.\\");
+        UI.getInstance().print("              ___     |    `");
+        UI.getInstance().print("             / .-\\  ./=)");
+        UI.getInstance().print("            |  |\"|_/\\/|");
+        UI.getInstance().print("            ;  |-;| /_|");
+        UI.getInstance().print("           / \\_| |/ \\ |");
+        UI.getInstance().print("          /      \\/\\( |");
+        UI.getInstance().print("          |   /  |` ) |");
+        UI.getInstance().print("          /   \\ _/    |");
+        UI.getInstance().print("         /--._/  \\    |");
+        UI.getInstance().print("         `/|)    |    /");
+        UI.getInstance().print("           /     |   |");
+        UI.getInstance().print("         .'      |   |");
+        UI.getInstance().print("        /         \\  |");
+        UI.getInstance().print("       (_.-.__.__./  /");
+        UI.getInstance().print("");
+        System.exit(0);
     }
 
     public boolean take(InteractableObject object, Position position) {
