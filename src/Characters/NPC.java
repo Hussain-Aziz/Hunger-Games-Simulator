@@ -51,8 +51,8 @@ public abstract class NPC extends Character implements Observer, Runnable {
 
     public String giveItem() {
         if (inventory.isEmpty()) return null;
-        String name = inventory.get(0).getName();
-        inventory.get(0).interact(this, "drop");
+        String name = inventory.get(inventory.size()-1).getName();
+        inventory.get(inventory.size()-1).interact(this, "drop");
         return name;
     }
 
