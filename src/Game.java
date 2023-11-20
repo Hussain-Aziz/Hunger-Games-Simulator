@@ -19,7 +19,8 @@ public class Game {
         UI.getInstance().print("You will now be dropped into the arena.");
         // create main character
         var startingScene = SceneManager.getInstance().getStartScene();
-        Character mainCharacter = new Katniss();
+        Katniss mainCharacter = new Katniss();
+        SceneManager.getInstance().setMainCharacter(mainCharacter);
         startingScene.characterEntry(mainCharacter, Direction.north);
 
         // create narrator and add characters as subjects

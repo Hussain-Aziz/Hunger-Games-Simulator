@@ -8,16 +8,18 @@ public class Talk implements CharacterState {
     }
     @Override
     public void prev(NPC npc) {
-        npc.setState(new Attack(npc));
+        npc.setState(Attack.name);
     }
 
     @Override
     public void next(NPC npc) {
-        npc.setState(new Give(npc));
+        npc.setState(Give.name);
     }
 
     @Override
     public String toString() {
-        return "Talking";
+        return name;
     }
+
+    public static final String name = "Talking";
 }

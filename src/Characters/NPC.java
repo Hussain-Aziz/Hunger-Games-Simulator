@@ -1,15 +1,15 @@
 package Characters;
 
-import Characters.CharacterStates.Attack;
-import Characters.CharacterStates.CharacterState;
-import Characters.CharacterStates.Dormant;
+import Characters.CharacterStates.*;
 import InteractableObjects.InteractableObject;
 import MessageArchitecture.Message;
 import MessageArchitecture.Observer;
 import Scenes.Position;
+import Singletons.SceneManager;
 import Singletons.UI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -67,7 +67,7 @@ public abstract class NPC extends Character implements Observer, Runnable {
 
     public void update(Message message) {
         // if a main character does something to npc
-        if (message.origin instanceof MainCharacter && ((Katniss) message.origin).getCurrentScene() == getCurrentScene()) {
+        if (message.origin instanceof MainCharacter) {
             switch (message.topic) {
                 case "meet" -> {
                     changeState();
@@ -75,7 +75,7 @@ public abstract class NPC extends Character implements Observer, Runnable {
                 case "attack" -> {
                     // if they attacked the npc, then the npc will attack back with a 30% chance
                     if (random.nextInt(10) < 3) {
-                        setState(new Attack(this));
+                        setState(Attack.name);
                     }
                 }
             }
@@ -106,11 +106,29 @@ public abstract class NPC extends Character implements Observer, Runnable {
         state.prev(this);
     }
 
-    public synchronized void setState(CharacterState state) {
-        if (health > 0) {
-            this.state = state;
+    public synchronized void setState(String state) {
+        if (SceneManager.getInstance().getMainCharacter().getCurrentScene() == getCurrentScene() && health > 0) {
+            this.state = createState(state);
         }
     }
+
+    private CharacterState createState(String name) {
+        switch (name) {
+            case "Talking" -> {
+                return new Talk(this);
+            }
+            case "Giving" -> {
+                return new Give(this);
+            }
+            case "Attacking" -> {
+                return new Attack(this);
+            }
+            default -> {
+                return new Dormant();
+            }
+        }
+    }
+
     public ArrayList<InteractableObject> getInventory() {
         return inventory;
     }

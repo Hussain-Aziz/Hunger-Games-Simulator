@@ -1,6 +1,8 @@
 package Singletons;
 
 import Characters.Character;
+import Characters.Katniss;
+import Characters.MainCharacter;
 import Scenes.*;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class SceneManager {
     private final HashMap<Scene, HashMap<Direction, Scene>> adjacentScenes;
 
     private final Scene startScene;
+    private MainCharacter mainCharacter;
     private int score;
 
     /**
@@ -66,6 +69,10 @@ public class SceneManager {
             instance = new SceneManager();
         }
         return instance;
+    }
+
+    public void setMainCharacter(MainCharacter mainCharacter) {
+        this.mainCharacter = mainCharacter;
     }
 
     /**
@@ -113,5 +120,9 @@ public class SceneManager {
             UI.getInstance().print("You have finished this game and you may now close this window");
             System.exit(0);
         }
+    }
+
+    public Katniss getMainCharacter() {
+        return (Katniss) mainCharacter;
     }
 }

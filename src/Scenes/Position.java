@@ -36,7 +36,7 @@ public class Position {
      */
     public boolean IsInRangeContact(Position position, int range) {
         if (position == null) return false;
-        return Math.abs(position.x - x) == range && Math.abs(position.y - y) == range;
+        return Math.abs(position.x - x) == range || Math.abs(position.y - y) == range;
     }
 
     /**

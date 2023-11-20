@@ -74,6 +74,7 @@ public abstract class Consumable extends InteractableObject implements Runnable 
         consumeObject();
         throwWrapping();
         state.getEffect().affect(sender);
+        interact(sender, "destroy");
     }
 
     protected abstract void throwWrapping();

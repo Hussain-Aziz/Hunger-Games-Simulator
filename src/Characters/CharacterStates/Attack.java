@@ -18,16 +18,18 @@ public class Attack implements CharacterState {
 
     @Override
     public void prev(NPC npc) {
-        npc.setState(new Talk(npc));
+        npc.setState(Talk.name);
     }
 
     @Override
     public void next(NPC npc) {
-        npc.setState(new Attack(npc));
+        npc.setState(Attack.name);
     }
 
     @Override
     public String toString() {
-        return "Attacking";
+        return name;
     }
+
+    public static final String name = "Attacking";
 }
