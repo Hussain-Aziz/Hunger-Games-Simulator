@@ -9,6 +9,10 @@ The Hunger Games is an event where characters have to participate in a fight to 
 ## Objective
 The objective of the game is to defeat all other characters found in the different areas in the game without dying. This is done with the help of different weapons found around the arena and certain consumables that allow the main character to regain health. 
 
+## Class Diagram
+
+![class_diagram](imgs/class_diagram.png)
+
 ## Using Design Patterns
 ### 1. Observer
 The observer was used for 2 aspects of the game. The first aspect of the game was the narrator. The narrator is a class that observes what happens in the game (such as taking damage, healing, death) and prints them to the screen. In this case there 
